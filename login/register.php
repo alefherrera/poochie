@@ -7,7 +7,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/poochie/funciones.php';
 if (isset($_REQUEST['submit'])) {
     $usuario = new usuarios();
     //Valido longitud y que no haya caracteres extraños
-    $valido = false;
+    $valido = true;
 
     if (!strlen(trim($_REQUEST['user'])) > 0 || !ctype_alnum($_REQUEST['user']))
         $valido = false;

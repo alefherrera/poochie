@@ -1,9 +1,12 @@
 <?php
+
 include 'conexion.php';
 include 'tablas.php';
+
 class usuarios implements tablas {
 
     private $_idusuarioauto, $_idusuario, $_nombre, $_pass, $_mail, $_fechaalta, $_fechamodificacion, $_status;
+
     public function get_idusuarioauto() {
         return $this->_idusuarioauto;
     }
@@ -68,15 +71,15 @@ class usuarios implements tablas {
         $this->_status = $_status;
     }
 
-        public function Select($usuario) {
+    public function Select($usuario) {
         $conexion = new conexion;
-        $consulta = "Call usuarios_select($usuario->idusuarioauto, $usuario->idusuario, $usuario->nombre, $usuario->pass, $usuario->mail, $usuario->fechaalta, $usuario->fechamodificacion, $usuario->status)";
+        $consulta = 'Call usuarios_select('.$usuario->get_idusuarioauto().','. $usuario->get_idusuario().','. $usuario->get_nombre().','. $usuario->get_pass().','.$usuario->get_mail().','.$usuario->get_fechaalta().','.$usuario->get_fechamodificacion().','.$usuario->get_status().')';
         mysql_query($consulta);
     }
 
     public function Insert($usuario) {
         $conexion = new conexion;
-        $consulta = "Call usuarios_insert('/$usuario->nombre/','/$usuario->pass/','/$usuario->mail/')";
+        $consulta = 'Call usuarios_insert(' . $usuario->get_nombre() . ',' . $usuario->get_pass() . ',' . $usuario->get_mail() . ')';
         mysql_query($consulta);
     }
 
@@ -89,6 +92,5 @@ class usuarios implements tablas {
     }
 
 }
-
 ;
 ?>

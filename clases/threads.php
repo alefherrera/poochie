@@ -5,7 +5,7 @@ include 'tablas.php';
 
 class threads implements tablas {
 
-    private $_idthreadauto, $_idthread, $_titulo, $_contenido, $_idusuario, $_votos, $_visitas, $_fechaalta, $_fechamodif, $_idusuariomodif, $_status;
+    private $_idthreadauto, $_idthread, $_titulo, $_mensaje, $_idusuario, $_votos, $_visitas, $_fechaalta, $_fechamodif, $_idusuariomodif, $_status;
 
     public function get_idthreadauto() {
         return $this->_idthreadauto;
@@ -20,7 +20,7 @@ class threads implements tablas {
     }
 
     public function get_contenido() {
-        return $this->_contenido;
+        return $this->_mensaje;
     }
 
     public function get_idusuario() {
@@ -63,8 +63,8 @@ class threads implements tablas {
         $this->_titulo = $_titulo;
     }
 
-    public function set_contenido($_contenido) {
-        $this->_contenido = $_contenido;
+    public function set_contenido($_mensaje) {
+        $this->_mensaje = $_mensaje;
     }
 
     public function set_idusuario($_idusuario) {
@@ -100,7 +100,7 @@ class threads implements tablas {
         $this->_idthread = -1;
 
         $this->_titulo = '';
-        $this->_contenido = '';
+        $this->_mensaje = '';
         $this->_idusuario = -1;
         $this->_votos = -1;
         $this->_visitas = -1;
@@ -129,7 +129,6 @@ class threads implements tablas {
     static public function Delete($usuario) {
         $conexion = new conexion;
     }
-
 }
 
 ;

@@ -31,8 +31,26 @@
     border-style:solid;
     border-color: #bababa;
     border-width: 1px;
+    width:100%;
+}
+
+.defaultform textarea
+{
+    border-style:solid;
+    border-color: #bababa;
+    border-width: 1px;
+    width:100%;
 }
 .labelcell { 
+    padding-left: 10px;
+    padding-right: 10px;
+    border-width: 4px;
+    border-style: solid;
+    border-color: #bababa;
+}
+.headercell {
+    font-family: sans-serif;
+    font-size: 12pt;
     padding-left: 10px;
     padding-right: 10px;
     border-width: 4px;

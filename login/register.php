@@ -5,10 +5,10 @@ include $_SERVER['DOCUMENT_ROOT'] . '/poochie/clases/usuarios.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/poochie/funciones.php';
 
 if (isset($_REQUEST['submit'])) {
-    $usuario = new usuarios();
+    $usuario = new usuarios;
+    $var = usuarios::Select($usuario);
     //Valido longitud y que no haya caracteres extraños
     $valido = true;
-
     if (!strlen(trim($_REQUEST['user'])) > 0 || !ctype_alnum($_REQUEST['user']))
         $valido = false;
     if (!strlen(trim($_REQUEST['password'])) > 0 || !ctype_alnum($_REQUEST['password']))
@@ -21,7 +21,7 @@ if (isset($_REQUEST['submit'])) {
         $usuario->set_nombre($_REQUEST['user']);
         $usuario->set_pass($_REQUEST['password']);
         $usuario->set_mail($_REQUEST['mail']);
-        $usuario->insert($usuario);
+        usuarios::Insert($usuario);
     }
 }
 ?>

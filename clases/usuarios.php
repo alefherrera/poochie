@@ -70,7 +70,7 @@ class usuarios implements tablas {
         $this->_status = $_status;
     }
     
-    public function __construct(){
+    function __construct(){
         $this->_idusuarioauto = -1;
         $this->_idusuario = -1;
         

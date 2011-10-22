@@ -1,0 +1,48 @@
+/* 
+    Document   : form_style
+    Created on : 19-oct-2011, 22:45:56
+    Author     : Nacho
+    Description:
+        Para formularios
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+.defaultform
+{
+    background-color: #ffffff;
+    border-style:solid;
+    border-width: 1px;
+    border-top-width: 5px;
+    border-color: #bababa;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+.defaultform label
+{
+    font-family: sans-serif;
+    font-size: 8pt;
+}
+.defaultform .textbox
+{
+    border-style:solid;
+    border-color: #bababa;
+    border-width: 1px;
+}
+.labelcell { 
+    padding-left: 10px;
+    padding-right: 10px;
+    border-width: 4px;
+    border-style: solid;
+    border-color: #bababa;
+}
+.fieldcell
+{
+    padding-left: 10px;
+    padding-right: 20px;
+    background-color: #9f9f9f;
+}
+

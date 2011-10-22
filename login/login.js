@@ -1,0 +1,40 @@
+
+$(document).ready(function() {
+    $("login input").keypress(function (e) {
+        if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13))
+            $("#submit").click();
+    });
+        
+    $("#loginbox").submit(function(){
+        var validate = true;
+        if(!validateTextBox($("#user").val())){
+            $("#user").css("background-color", "#FFB3B3");
+            validate = false;
+        }
+        if(!validateTextBox($("#password").val())){
+            $("#password").css("background-color", "#FFB3B3");
+            validate = false;
+        }
+        return validate;
+    });
+    
+    $("#user").keyup(function() {
+        if($(this).val() == 0)
+            return;
+        if(validateTextBox($(this).val())){
+            $(this).css("background-color", "#FFFFFF");
+            return;
+        }
+        $(this).css("background-color", "#FFB3B3");
+    });
+    
+    $("#password").keyup(function() {
+        if($(this).val() == 0)
+            return;
+        if(validateTextBox($(this).val())){
+            $(this).css("background-color", "#FFFFFF");
+            return;
+        }
+        $(this).css("background-color", "#FFB3B3");
+    });
+});

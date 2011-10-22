@@ -2,13 +2,13 @@
 
 interface tablas {
 
-    public function Select();
+    public function Select($variable);
 
-    public function Insert();
+    public function Insert($variable);
 
-    public function Update();
+    public function Update($variable);
 
-    public function Delete();
+    public function Delete($variable);
 }
 
 ?>

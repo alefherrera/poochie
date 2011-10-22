@@ -5,7 +5,8 @@ include 'tablas.php';
 
 class usuarios implements tablas {
 
-    private $_idusuarioauto, $_idusuario, $_nombre, $_pass, $_mail, $_fechaalta, $_fechamodificacion, $_status;
+    private $_idusuarioauto, $_idusuario, $_nombre, $_pass, $_mail, $_fechaalta, $_fechamodif, $_status;
+
     public function get_idusuarioauto() {
         return $this->_idusuarioauto;
     }
@@ -31,7 +32,7 @@ class usuarios implements tablas {
     }
 
     public function get_fechamodificacion() {
-        return $this->_fechamodificacion;
+        return $this->_fechamodif;
     }
 
     public function get_status() {
@@ -62,32 +63,31 @@ class usuarios implements tablas {
         $this->_fechaalta = $_fechaalta;
     }
 
-    public function set_fechamodificacion($_fechamodificacion) {
-        $this->_fechamodificacion = $_fechamodificacion;
+    public function set_fechamodificacion($_fechamodif) {
+        $this->_fechamodif = $_fechamodif;
     }
 
     public function set_status($_status) {
         $this->_status = $_status;
     }
-    
-    function __construct(){
+
+    function __construct() {
         $this->_idusuarioauto = -1;
         $this->_idusuario = -1;
-        
+
         $this->_nombre = '';
         $this->_pass = '';
         $this->_mail = '';
-        
+
         $this->_fechaalta = 0;
-        $this->_fechamodificacion = 0;
-        
+        $this->_fechamodif = 0;
+
         $this->_status = 1;
     }
-    
-    
-    static public function  Select($usuario) {
+
+    static public function Select($usuario) {
         $conexion = new conexion;
-        $consulta = 'Call usuarios_SELECT(\'' . $usuario->get_idusuarioauto() . '\',\'' . $usuario->get_idusuario() . '\',\'' . $usuario->get_nombre() . '\',\'' . $usuario->get_pass() . '\',\'' . $usuario->get_mail() . '\',' . $usuario->get_fechaalta() . ',' . $usuario->get_fechamodificacion() .' ,' . $usuario->get_status() . ')';
+        $consulta = 'Call usuarios_SELECT(\'' . $usuario->get_idusuarioauto() . '\',\'' . $usuario->get_idusuario() . '\',\'' . $usuario->get_nombre() . '\',\'' . $usuario->get_pass() . '\',\'' . $usuario->get_mail() . '\',' . $usuario->get_fechaalta() . ',' . $usuario->get_fechamodificacion() . ' ,' . $usuario->get_status() . ')';
         return mysql_query($consulta);
     }
 
@@ -103,6 +103,29 @@ class usuarios implements tablas {
 
     static public function Delete($usuario) {
         $conexion = new conexion;
+    }
+
+    static public function Load($usuario) {
+        $result = usuarios::Select($usuario);
+        if (!$result){
+            echo 'Error en la consulta: ' . mysql_error();
+            return false;
+        }
+        $row = mysql_fetch_array($result);
+
+        $usuario->set_idusuarioauto($row["idUsuarioAuto"]);
+        $usuario->set_idusuario($row["idUsuario"]);
+
+        $usuario->set_nombre($row["Nombre"]);
+        $usuario->set_pass($row["Pass"]);
+        $usuario->set_mail($row["Mail"]);
+
+        $usuario->set_fechaalta($row["FechaAlta"]);
+        $usuario->set_fechamodificacion($row["FechaModificacion"]);
+
+        $usuario->set_status($row["Status"]);
+
+        return $usuario;
     }
 
 }

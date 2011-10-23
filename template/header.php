@@ -17,15 +17,17 @@ echo '
             <div id="banner">
             </div> 
             <ul id="menu">
-                    <li id="left"><a href="/poochie/index.php" target="_self">' . $txt['header_home'] . '</a></li>
-                        <li id="left"><a href="/poochie/threads/submit.php" target="_self">' . $txt['header_new_thread'] . '</a></li>
-                    <li id="left"><a href="users.php" target="_self">Usuarios</a></li>';
+                    ';
 if (isset($_SESSION['usuario'])) {
     //Usuario
-    echo '<li id="right"><a href="/poochie/login/logout.php" target="_self">Desconectarse</a></li>
-                        <li id="right"><a href="/poochie/perfil.php" target="_self">' . $_SESSION['usuario']->get_nombre() . '</a></li>';
+    echo '<li id="left"><a href="/poochie/index.php" target="_self">' . $txt['header_home'] . '</a></li>';
+    echo '<li id="left"><a href="/poochie/threads/submit.php" target="_self">' . $txt['header_new_thread'] . '</a></li>';
+    echo '<li id="left"><a href="users.php" target="_self">' . $txt['header_users'] . '</a></li>';
+    echo '<li id="right"><a href="/poochie/login/logout.php" target="_self">' . $txt['header_disconnect'] . '</a></li>';
+    echo '<li id="right"><a href="/poochie/perfil.php" target="_self">' . $_SESSION['usuario']->get_nombre() . '</a></li>';
 } else {
     //Invitado
+    echo '<li id="left"><a href="/poochie/index.php" target="_self">' . $txt['header_home'] . '</a></li>';
     echo '<li id="right"><a href="/poochie/login/register.php" target="_self">' . $txt['header_register'] . '</a></li>';
     echo '<li id="right"><a href="/poochie/login/login.php" target="_self">' . $txt['header_connect'] . '</a></li>';
 }

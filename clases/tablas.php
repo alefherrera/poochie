@@ -9,6 +9,8 @@ interface tablas {
     static public function Update($variable);
 
     static public function Delete($variable);
+
+    static public function Load($variable);
 }
 
 ?>

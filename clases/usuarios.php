@@ -1,7 +1,7 @@
 <?php
 
-include 'conexion.php';
-include 'tablas.php';
+include_once 'conexion.php';
+include_once 'tablas.php';
 
 class usuarios implements tablas {
 

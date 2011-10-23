@@ -1,7 +1,7 @@
 <?php
 
-include 'tablas.php';
-include 'conexion.php';
+include_once 'tablas.php';
+include_once 'conexion.php';
 
 class posts implements tablas {
 

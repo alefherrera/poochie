@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
 save_lastPage();
 ?>
 <head>
@@ -37,7 +37,7 @@ save_lastPage();
 </table>
 </div>
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/footer.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/footer.php';
 ?>
 
 

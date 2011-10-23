@@ -1,6 +1,6 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/poochie/language/spanish/register.spanish.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/language/spanish/register.spanish.php';
 
 if(islogged()){
     redir_session();
@@ -80,5 +80,5 @@ echo '<div id="registerbox" style="margin:auto; display: table; margin-top: 5%">
 </div>'
 ?>
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/footer.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/footer.php';
 ?>

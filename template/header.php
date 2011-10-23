@@ -1,8 +1,8 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/poochie/clases/usuarios.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/clases/usuarios.php';
 session_start();
-include $_SERVER['DOCUMENT_ROOT'] . '/poochie/funciones.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/poochie/language/spanish/header.spanish.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/funciones.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/language/spanish/header.spanish.php';
 
 echo '
 <html>

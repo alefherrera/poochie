@@ -1,6 +1,7 @@
 <?php 
-include $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php'; 
-include $_SERVER['DOCUMENT_ROOT'].'/poochie/language/spanish/submit.spanish.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/poochie/template/header.php'; 
+include_once $_SERVER['DOCUMENT_ROOT'].'/poochie/language/spanish/submit.spanish.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/poochie/clases/threads.php';
         
 if (!islogged()){
     reddir_session();
@@ -64,4 +65,4 @@ echo '<div id="submitbox" style="margin:auto; display: table; margin-top: 5%; wi
     </form>
 </div>'
 ?>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/footer.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/footer.php'; ?>

@@ -2,9 +2,11 @@
 include $_SERVER['DOCUMENT_ROOT'].'/poochie/template/header.php'; 
 include $_SERVER['DOCUMENT_ROOT'].'/poochie/language/spanish/login.spanish.php';
 
-if ($_REQUEST['submit']){
-    $usuario = new usuarios;
-    $var = usuarios::Load($_REQUEST['user']);
+if (isset($_REQUEST['submit'])){
+    $usuario = new usuarios();
+    $usuario->set_nombre($_REQUEST['user']);
+    $var = new usuarios();
+    $var = usuarios::Load($usuario);
     if(!isset($var)){
         //Mandar a página de error.
     }

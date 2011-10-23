@@ -13,8 +13,7 @@ if (isset($_REQUEST['submit'])){
     else if($usuario->get_nombre() == $_REQUEST['user'] && $usuario->get_pass() == $_REQUEST['password']){
         //Iniciar Session
         $_SESSION['usuario'] = $usuario;
-        echo '<meta http-equiv="Refresh" content="0;url=/poochie/index.php" />';
-        exit;
+        redir_session();
     }
     
 }

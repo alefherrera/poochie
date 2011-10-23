@@ -1,9 +1,5 @@
 <?php
 include '../template/header.php';
 session_destroy();
-
+redir_session();
 ?>
-<html>
-    <head>
-        <meta http-equiv="Refresh" content="0;url=../index.php" />
-    </head>

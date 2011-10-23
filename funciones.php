@@ -67,7 +67,26 @@ function save_lastPage() {
  */
 function islogged() {
     if (isset($_SESSION['usuario'])) {
+        redir($_SESSION['lastpage']);
+        exit;
+    }
+}
+
+/**
+ * Redirecciona a la página indicada.
+ * @param string $url Url de la página a redireccionar. 
+ */
+function redir($url) {
+        echo '<meta http-equiv="Refresh" content="0;url=' . $url . '" />';
+        exit;
+}
+
+function redir_session() {
+    if (isset($_SESSION['lastpage'])) {
         echo '<meta http-equiv="Refresh" content="0;url=' . $_SESSION['lastpage'] . '" />';
+        exit;
+    } else {
+        echo '<meta http-equiv="Refresh" content="0;url=' . $_SERVER['DOCUMENT_ROOT'] . "'/poochie/index.php/>'";
         exit;
     }
 }

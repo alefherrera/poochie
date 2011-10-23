@@ -1,7 +1,6 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/poochie/language/spanish/register.spanish.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/poochie/clases/usuarios.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/poochie/funciones.php';
 
 if (isset($_REQUEST['submit'])) {

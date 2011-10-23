@@ -1,9 +1,6 @@
 <?php
 session_start();
-
-if (isset($_REQUEST['user']) && !isset($_SESSION['usuario'])) {
-    $_SESSION['usuario'] = $_REQUEST['user'];
-}
+include $_SERVER['DOCUMENT_ROOT'] . '/poochie/clases/usuarios.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/poochie/language/spanish/header.spanish.php';
 echo '
 <html>
@@ -23,7 +20,7 @@ echo '
 if (isset($_SESSION['usuario'])) {
     //Usuario
     echo '<li id="right"><a href="/poochie/login/logout.php" target="_self">Desconectarse</a></li>
-                        <li id="right"><a href="/poochie/perfil.php" target="_self">' . $_SESSION['usuario'] . '</a></li>';
+                        <li id="right"><a href="/poochie/perfil.php" target="_self">' . $_SESSION['usuario']->get_name() . '</a></li>';
 } else {
     //Invitado
     echo '<li id="right"><a href="/poochie/login/register.php" target="_self">' . $txt['register'] . '</a></li>';

@@ -1,8 +1,21 @@
 <?php 
 include $_SERVER['DOCUMENT_ROOT'].'/poochie/template/header.php'; 
 include $_SERVER['DOCUMENT_ROOT'].'/poochie/language/spanish/login.spanish.php';
-?>
 
+if ($_REQUEST['submit']){
+    $usuario = new usuarios;
+    $var = usuarios::Load($_REQUEST['user']);
+    if(!isset($var)){
+        //Mandar a página de error.
+    }
+    else if($var->get_nombre() == $_REQUEST['user'] && $var->get_pass() == $_REQUEST['password']){
+        //Iniciar Session
+        $_SESSION['usuario'] = $var;
+    }
+    
+}
+
+?>
 <head>
     <link rel="stylesheet" href="/poochie/template/styles/form_style.css" type="text/css" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,7 +24,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/poochie/language/spanish/login.spanish.php';
 </head>
 <?php
 echo '<div id="loginbox" style="margin:auto; display: table; margin-top: 5%">
-    <form class="defaultform"  name="login" action="/poochie/index.php" method="post">
+    <form class="defaultform"  name="login" action="/poochie/login/login.php" method="post">
         <table>
             <tr>
                 <td class="labelcell">

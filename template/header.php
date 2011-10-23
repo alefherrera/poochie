@@ -1,7 +1,8 @@
 <?php
-session_start();
 include $_SERVER['DOCUMENT_ROOT'] . '/poochie/clases/usuarios.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/poochie/language/spanish/header.spanish.php';
+session_start();
+
 echo '
 <html>
     <head>
@@ -20,7 +21,7 @@ echo '
 if (isset($_SESSION['usuario'])) {
     //Usuario
     echo '<li id="right"><a href="/poochie/login/logout.php" target="_self">Desconectarse</a></li>
-                        <li id="right"><a href="/poochie/perfil.php" target="_self">' . $_SESSION['usuario']->get_name() . '</a></li>';
+                        <li id="right"><a href="/poochie/perfil.php" target="_self">' . $_SESSION['usuario']->get_nombre() . '</a></li>';
 } else {
     //Invitado
     echo '<li id="right"><a href="/poochie/login/register.php" target="_self">' . $txt['register'] . '</a></li>';

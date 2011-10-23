@@ -1,16 +1,14 @@
 <?php 
 include $_SERVER['DOCUMENT_ROOT'].'/poochie/template/header.php'; 
 include $_SERVER['DOCUMENT_ROOT'].'/poochie/language/spanish/login.spanish.php';
-
 if (isset($_REQUEST['submit'])){
     $usuario = new usuarios();
     $usuario->set_nombre($_REQUEST['user']);
-    $var = new usuarios();
-    $var = usuarios::Load($usuario);
-    if(!isset($var)){
+    $usuario = usuarios::Load($usuario);
+    if(!($usuario)){
         //Mandar a página de error.
     }
-    else if($var->get_nombre() == $_REQUEST['user'] && $var->get_pass() == $_REQUEST['password']){
+    else if($usuario->get_nombre() == $_REQUEST['user'] && $usuario->get_pass() == $_REQUEST['password']){
         //Iniciar Session
         $_SESSION['usuario'] = $var;
         echo '<meta http-equiv="Refresh" content="0;url=/poochie/index.php" />';

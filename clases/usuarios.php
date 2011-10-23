@@ -89,12 +89,23 @@ class usuarios implements tablas {
         $conexion = new conexion;
         $consulta = 'Call usuarios_SELECT(\'' . $usuario->get_idusuarioauto() . '\',\'' . $usuario->get_idusuario() . '\',\'' . $usuario->get_nombre() . '\',\'' . $usuario->get_pass() . '\',\'' . $usuario->get_mail() . '\',' . $usuario->get_fechaalta() . ',' . $usuario->get_fechamodificacion() . ' ,' . $usuario->get_status() . ')';
         return mysql_query($consulta);
+        $result = mysql_query($consulta);
+        if (!$result) {
+            echo 'Error en la consulta: ' . mysql_error();
+            return false;
+        }
+        return $result;
     }
 
     static public function Insert($usuario) {
         $conexion = new conexion;
         $consulta = 'Call usuarios_INSERT(\'' . $usuario->get_nombre() . '\',\'' . $usuario->get_pass() . '\',\'' . $usuario->get_mail() . '\')';
-        return mysql_query($consulta);
+        $result = mysql_query($consulta);
+        if (!$result) {
+            echo 'Error en la consulta: ' . mysql_error();
+            return false;
+        }
+        return $result;
     }
 
     static public function Update($usuario) {
@@ -107,8 +118,8 @@ class usuarios implements tablas {
 
     static public function Load($usuario) {
         $result = usuarios::Select($usuario);
-        if (!$result){
-            echo 'Error en la consulta: ' . mysql_error();
+
+        if ($result == false) {
             return false;
         }
         $row = mysql_fetch_array($result);
@@ -117,6 +128,7 @@ class usuarios implements tablas {
         $usuario->set_idusuario($row["idUsuario"]);
 
         $usuario->set_nombre($row["Nombre"]);
+
         $usuario->set_pass($row["Pass"]);
         $usuario->set_mail($row["Mail"]);
 

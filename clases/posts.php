@@ -112,7 +112,7 @@ class posts implements tablas {
     static public function Select($post) {
         $conexion = new conexion();
         $consulta = "Call posts_SELECT('" . $post->get_idpostauto() . "','" . $post->get_idpost() .
-                "','" . $post->get_idthread() . ".','" . $post->get_idpostpadre() . "','" . $post->get_idusuario()
+                "','" . $post->get_idthread() . "','" . $post->get_idpostpadre() . "','" . $post->get_idusuario()
                 . "','" . $post->get_mensaje() . "'," . $post->get_fechaalta() . "," . $post->get_fechamodificacion()
                 . ",'" . $post->get_usuariomodif() . "','" . $post->get_votos() . "'," . $post->get_status() . ")";
         return mysql_query($consulta);

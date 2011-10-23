@@ -85,7 +85,7 @@ class usuarios implements tablas {
     static public function Select($usuario) {
         $conexion = new conexion();
         $consulta = "Call usuarios_SELECT('" . $usuario->get_idusuarioauto() . "','" . $usuario->get_idusuario() . "','"
-                . $usuario->get_nombre() . ".','" . $usuario->get_pass() . "','" . $usuario->get_mail() . "',"
+                . $usuario->get_nombre() . "','" . $usuario->get_pass() . "','" . $usuario->get_mail() . "',"
                 . $usuario->get_fechaalta() . "," . $usuario->get_fechamodificacion() . "," . $usuario->get_status() . ")";
         return mysql_query($consulta);
         $result = mysql_query($consulta);

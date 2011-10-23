@@ -17,7 +17,8 @@ echo '
             <div id="banner">
             </div> 
             <ul id="menu">
-                    <li id="left"><a href="index.php" target="_self">' . $txt['home'] . '</a></li>
+                    <li id="left"><a href="/poochie/index.php" target="_self">' . $txt['header_home'] . '</a></li>
+                        <li id="left"><a href="/poochie/threads/submit.php" target="_self">' . $txt['header_new_thread'] . '</a></li>
                     <li id="left"><a href="users.php" target="_self">Usuarios</a></li>';
 if (isset($_SESSION['usuario'])) {
     //Usuario
@@ -25,8 +26,8 @@ if (isset($_SESSION['usuario'])) {
                         <li id="right"><a href="/poochie/perfil.php" target="_self">' . $_SESSION['usuario']->get_nombre() . '</a></li>';
 } else {
     //Invitado
-    echo '<li id="right"><a href="/poochie/login/register.php" target="_self">' . $txt['register'] . '</a></li>';
-    echo '<li id="right"><a href="/poochie/login/login.php" target="_self">' . $txt['connect'] . '</a></li>';
+    echo '<li id="right"><a href="/poochie/login/register.php" target="_self">' . $txt['header_register'] . '</a></li>';
+    echo '<li id="right"><a href="/poochie/login/login.php" target="_self">' . $txt['header_connect'] . '</a></li>';
 }
 ?>
 </ul>

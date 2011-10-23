@@ -136,11 +136,26 @@ class posts implements tablas {
     }
 
     static public function Update($post) {
+        //($idPost int, $idThread int, $idPostPadre int, $idUsuario int, $Mensaje text, $FechaAlta timestamp,$idUsuarioModificacion int)
         $conexion = new conexion();
+        $consulta = "Call posts_UPDATE('" . $post->get_idthread() . "','" . $post->get_idpostpadre() . "','" . $post->get_idusuario() . "','" . $post->get_mensaje() . "'," . $post->get_fechaalta() . ",'" . $post->get_usuariomodif() . "')";
+        $result = mysql_query($consulta);
+        if (!$result) {
+            echo 'Error en la consulta: ' . mysql_error();
+            return false;
+        }
+        return $result;
     }
 
     static public function Delete($post) {
         $conexion = new conexion();
+        $consulta = "Call posts_DELETE('" . $usuario->get_idpost() . "')";
+        $result = mysql_query($consulta);
+        if (!$result) {
+            echo 'Error en la consulta: ' . mysql_error();
+            return false;
+        }
+        return $result;
     }
 
 }

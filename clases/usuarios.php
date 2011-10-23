@@ -109,10 +109,24 @@ class usuarios implements tablas {
 
     static public function Update($usuario) {
         $conexion = new conexion();
+        $consulta = "Call usuarios_UPDATE('" . $usuario->get_idusuario() . "','" . $usuario->get_nombre() . "','" . $usuario->get_mail() ."'," . $usuario->get_fechaalta(). ")";
+        $result = mysql_query($consulta);
+        if (!$result) {
+            echo 'Error en la consulta: ' . mysql_error();
+            return false;
+        }
+        return $result;
     }
 
     static public function Delete($usuario) {
         $conexion = new conexion();
+        $consulta = "Call usuarios_DELETE('" . $usuario->get_idusuario() . "')";
+        $result = mysql_query($consulta);
+        if (!$result) {
+            echo 'Error en la consulta: ' . mysql_error();
+            return false;
+        }
+        return $result;
     }
 
     static public function Load($usuario) {

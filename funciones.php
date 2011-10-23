@@ -1,7 +1,9 @@
 <?php
+
 /*
  * Valido que sea un mail valido
  */
+
 function check_email_address($email) {
     // First, we check that there's one @ symbol, 
     // and that the lengths are right.
@@ -36,6 +38,38 @@ function check_email_address($email) {
         }
     }
     return true;
+}
+
+/**
+ * Arma el link de la página en la que estoy y lo retorna.
+ * @return string Link de la página
+ */
+function curPageURL() {
+    $pageURL = 'http';
+    $pageURL .= "://";
+    if ($_SERVER["SERVER_PORT"] != "80") {
+        $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+    } else {
+        $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+    }
+    return $pageURL;
+}
+
+/**
+ * Guarda la página en la session asi el usuario puede ser redireccionado.
+ */
+function save_lastPage() {
+    $_SESSION['lastpage'] = curPageURL();
+}
+
+/**
+ * Si el usuario esta loggeado redirecciona a la página anterior.
+ */
+function islogged() {
+    if (isset($_SESSION['usuario'])) {
+        echo '<meta http-equiv="Refresh" content="0;url=' . $_SESSION['lastpage'] . '" />';
+        exit;
+    }
 }
 
 ?>

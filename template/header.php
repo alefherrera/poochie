@@ -1,7 +1,7 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/poochie/clases/usuarios.php';
 session_start();
-
+include $_SERVER['DOCUMENT_ROOT'] . '/poochie/funciones.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/poochie/language/spanish/header.spanish.php';
 
 echo '

@@ -1,8 +1,8 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/poochie/language/spanish/register.spanish.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/poochie/funciones.php';
 
+islogged();
 if (isset($_REQUEST['submit'])) {
     $usuario = new usuarios;
     $var = usuarios::Select($usuario);

@@ -159,6 +159,29 @@ class threads implements tablas {
         return $result;
     }
 
+    static public function Load($thread) {
+        $result = threads::Select($thread);
+
+        if ($result == false) {
+            return false;
+        }
+        $row = mysql_fetch_array($result);
+
+        $thread->set_idthreadauto($row["idThreadAuto"]);
+        $thread->set_idthread($row["idThread"]);
+        $thread->set_titulo($row["Titulo"]);
+        $thread->set_mensaje($row["Contenido"]);
+        $thread->set_idusuario($row["idUusuario"]);
+        $thread->set_fechaalta($row["FechaCreacion"]);
+        $thread->set_fechamodif($row["FechaModificacion"]);
+        $thread->set_idusuariomodif($row["idUsuarioModificacion"]);
+        $thread->set_visitas($row["Visitas"]);
+        $thread->set_votos($row["Votos"]);
+        $thread->set_status($row["Status"]);
+
+        return $thread;
+    }
+
 }
 
 ;

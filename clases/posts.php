@@ -157,6 +157,28 @@ class posts implements tablas {
         }
         return $result;
     }
+    
+    static public function Load($post) {
+        $result = threads::Select($post);
+
+        if ($result == false) {
+            return false;
+        }
+        $row = mysql_fetch_array($result);
+
+        $post->set_idpostauto($row["idPostAuto"]);
+        $post->set_idpost($row["idPost"]);
+        $post->set_idthread($row["idThread"]);
+        $post->set_idpostpadre($row["idPostPadre"]);
+        $post->set_idusuario($row["idUusuario"]);
+        $post->set_mensaje($row["Mensaje"]);        
+        $post->set_fechaalta($row["FechaCreacion"]);
+        $post->set_fechamodif($row["FechaModificacion"]);
+        $post->set_idusuariomodif($row["idUsuarioModificacion"]);
+        $post->set_votos($row["Votos"]);
+        $post->set_status($row["Status"]);
+        return $post;
+    }
 
 }
 

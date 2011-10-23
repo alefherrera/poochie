@@ -1,0 +1,19 @@
+/* 
+    Document   : index_style
+    Created on : 23-oct-2011, 18:39:38
+    Author     : Nacho
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.thread
+{
+    border-width: 1px;
+    border-style: solid;
+}
+
+.thread td
+{
+    border-width: 1px;
+    border-style: solid;
+}

@@ -1,4 +1,5 @@
 <?php
+
 include 'tablas.php';
 include 'conexion.php';
 
@@ -97,38 +98,51 @@ class posts implements tablas {
     function __construct() {
         $this->_idpostauto = -1;
         $this->_idpost = -1;
-        
         $this->_idthread = -1;
         $this->_idpostpadre = -1;
         $this->_idusuario = -1;
         $this->_mensaje = '';
         $this->_votos = -1;
-        
         $this->_fechaalta = 0;
-        $this->_fechamodif= 0;
+        $this->_fechamodif = 0;
         $this->_idusuariomodif = -1;
         $this->_status = 1;
     }
-    
+
     static public function Select($post) {
-        $conexion = new conexion;
-        $consulta = 'Call usuarios_SELECT()';
+        $conexion = new conexion();
+        $consulta = "Call posts_SELECT('" . $post->get_idpostauto() . "','" . $post->get_idpost() .
+                "','" . $post->get_idthread() . ".','" . $post->get_idpostpadre() . "','" . $post->get_idusuario()
+                . "','" . $post->get_mensaje() . "'," . $post->get_fechaalta() . "," . $post->get_fechamodificacion()
+                . ",'" . $post->get_usuariomodif() . "','" . $post->get_votos() . "'," . $post->get_status() . ")";
         return mysql_query($consulta);
+        $result = mysql_query($consulta);
+        if (!$result) {
+            echo 'Error en la consulta: ' . mysql_error();
+            return false;
+        }
+        return $result;
     }
 
-    static public function Insert($usuario) {
-        $conexion = new conexion;
-        $consulta = 'Call usuarios_INSERT()';
-        return mysql_query($consulta);
+    static public function Insert($post) {
+        $conexion = new conexion();
+        $consulta = "Call posts_INSERT('" . $post->get_idthread() . "','" . $post->get_idpostpadre() . "','" . $post->get_idusuario() . "','" . $post->get_mensaje() . "')";
+        $result = mysql_query($consulta);
+        if (!$result) {
+            echo 'Error en la consulta: ' . mysql_error();
+            return false;
+        }
+        return $result;
     }
 
-    static public function Update($usuario) {
-        $conexion = new conexion;
+    static public function Update($post) {
+        $conexion = new conexion();
     }
 
-    static public function Delete($usuario) {
-        $conexion = new conexion;
+    static public function Delete($post) {
+        $conexion = new conexion();
     }
+
 }
 
 ;

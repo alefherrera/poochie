@@ -127,7 +127,6 @@ class threads implements tablas {
 
     static public function Insert($thread) {
         $conexion = new conexion();
-        $thread = new threads();
         $consulta = "Call threads_INSERT('" . $thread->get_titulo() . "','" . $thread->get_mensaje() . "','" . $thread->get_idusuario() . "')";
         $result = mysql_query($consulta);
         if (!$result) {

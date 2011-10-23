@@ -5,6 +5,15 @@ include $_SERVER['DOCUMENT_ROOT'].'/poochie/language/spanish/submit.spanish.php'
 if (!islogged()){
     reddir_session();
 }
+
+//Si apreto en enviar
+if (isset($_REQUEST['submit'])) {
+    $thread = new threads();
+    $thread->set_idusuario($_SESSION['usuario']->get_idusuario());
+    $thread->set_titulo($_REQUEST['titulo']);
+    $thread->set_mensaje($_REQUEST['mensaje']);
+    threads::Insert($thread);
+}
 ?>
 <head>
     <link rel="stylesheet" href="/poochie/template/styles/form_style.css" type="text/css" />

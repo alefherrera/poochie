@@ -2,7 +2,9 @@
 include $_SERVER['DOCUMENT_ROOT'].'/poochie/template/header.php'; 
 include $_SERVER['DOCUMENT_ROOT'].'/poochie/language/spanish/login.spanish.php';
 
-islogged();
+if(islogged()){
+    redir_session();
+}
 if (isset($_REQUEST['submit'])){
     $usuario = new usuarios();
     $usuario->set_nombre($_REQUEST['user']);

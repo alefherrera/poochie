@@ -67,9 +67,9 @@ function save_lastPage() {
  */
 function islogged() {
     if (isset($_SESSION['usuario'])) {
-        redir($_SESSION['lastpage']);
-        exit;
+        return true;
     }
+    return false;
 }
 
 /**
@@ -77,8 +77,8 @@ function islogged() {
  * @param string $url Url de la página a redireccionar. 
  */
 function redir($url) {
-        echo '<meta http-equiv="Refresh" content="0;url=' . $url . '" />';
-        exit;
+    echo '<meta http-equiv="Refresh" content="0;url=' . $url . '" />';
+    exit;
 }
 
 function redir_session() {

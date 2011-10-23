@@ -1,6 +1,10 @@
 <?php 
 include $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php'; 
-include $_SERVER['DOCUMENT_ROOT'].'/poochie/language/spanish/submit.spanish.php'
+include $_SERVER['DOCUMENT_ROOT'].'/poochie/language/spanish/submit.spanish.php';
+        
+if (!islogged()){
+    reddir_session();
+}
 ?>
 <head>
     <link rel="stylesheet" href="/poochie/template/styles/form_style.css" type="text/css" />

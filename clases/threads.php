@@ -55,19 +55,19 @@ class threads implements tablas {
         $this->_fechaalta = $_fechaalta;
     }
 
-    public function get_fechamodif() {
+    public function get_fechamodificacion() {
         return $this->_fechamodif;
     }
 
-    public function set_fechamodif($_fechamodif) {
+    public function set_fechamodificacion($_fechamodif) {
         $this->_fechamodif = $_fechamodif;
     }
 
-    public function get_idusuariomodif() {
+    public function get_idusuariomodificacion() {
         return $this->_idusuariomodif;
     }
 
-    public function set_idusuariomodif($_idusuariomodif) {
+    public function set_idusuariomodificacion($_idusuariomodif) {
         $this->_idusuariomodif = $_idusuariomodif;
     }
 

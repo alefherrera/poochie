@@ -8,12 +8,64 @@
 
 .thread
 {
-    border-width: 1px;
-    border-style: solid;
+    font-family: sans-serif;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+.thread .title 
+{
+}
+.thread .title a:link{color: #010101; text-decoration: none;}
+.thread .title a:visited {color: #83569d; text-decoration: none; }
+
+.thread .column
+{
+    padding-right: 10px;
+}
+.thread .general
+{
+    font-size: 8pt;
+    padding-right: 10px;
+}
+.thread .user
+{
+    font-size: 8pt;
+    color: #0068ff;
+}
+.thread table
+{
+    border-collapse: collapse;
+}
+.thread .column .total
+{
+    font-size: 14pt;
+    color:#bababa;
+}
+.thread .positive
+{
+    font-size: 8pt;
+    color:#49b54f;
+    padding-right: 5px;
 }
 
-.thread td
+.thread .negative
 {
-    border-width: 1px;
-    border-style: solid;
+    font-size: 8pt;
+    color:#b54949;
+}
+
+.thread .column .up_arrow
+{
+    background-image: url(../images/up_arrow.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 16px;
+}
+
+.thread .column .down_arrow
+{
+    background-image: url(../images/down_arrow.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 16px;
 }

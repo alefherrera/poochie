@@ -5,7 +5,7 @@ include_once 'tablas.php';
 
 class threads implements tablas {
 
-    private $_idthreadauto, $_idthread, $_titulo, $_mensaje, $_idusuario, $_fechaalta, $_fechamodif, $_idusuariomodif, $_visitas, $_votos, $_status;
+    private $_idthreadauto, $_idthread, $_titulo, $_contenido, $_idusuario, $_fechaalta, $_fechamodif, $_idusuariomodif, $_visitas, $_votos, $_status;
 
     public function get_idthreadauto() {
         return $this->_idthreadauto;
@@ -31,12 +31,12 @@ class threads implements tablas {
         $this->_titulo = $_titulo;
     }
 
-    public function get_mensaje() {
-        return $this->_mensaje;
+    public function get_contenido() {
+        return $this->_contenido;
     }
 
-    public function set_mensaje($_mensaje) {
-        $this->_mensaje = $_mensaje;
+    public function set_contenido($_contenido) {
+        $this->_contenido = $_contenido;
     }
 
     public function get_idusuario() {
@@ -99,7 +99,7 @@ class threads implements tablas {
         $this->_idthreadauto = -1;
         $this->_idthread = -1;
         $this->_titulo = '';
-        $this->_mensaje = '';
+        $this->_contenido = '';
         $this->_idusuario = -1;
         $this->_fechaalta = 0;
         $this->_fechamodif = 0;
@@ -113,7 +113,7 @@ class threads implements tablas {
 
         $conexion = new conexion();
         $consulta = "Call threads_SELECT('" . $thread->get_idthreadauto() . "','" . $thread->get_idthread()
-                . "','" . $thread->get_titulo() . "','" . $thread->get_mensaje() . "','" . $thread->get_idusuario()
+                . "','" . $thread->get_titulo() . "','" . $thread->get_contenido() . "','" . $thread->get_idusuario()
                 . "'," . $thread->get_fechaalta() . "," . $thread->get_fechamodificacion() . ",'" . $thread->get_usuariomodif()
                 . "','" . $thread->get_visitas() . "','" . $thread->get_votos() . "'," . $thread->get_status() . ")";
         return mysql_query($consulta);
@@ -127,7 +127,7 @@ class threads implements tablas {
 
     static public function Insert($thread) {
         $conexion = new conexion();
-        $consulta = "Call threads_INSERT('" . $thread->get_titulo() . "','" . $thread->get_mensaje() . "','" . $thread->get_idusuario() . "')";
+        $consulta = "Call threads_INSERT('" . $thread->get_titulo() . "','" . $thread->get_contenido() . "','" . $thread->get_idusuario() . "')";
         $result = mysql_query($consulta);
         if (!$result) {
             echo 'Error en la consulta: ' . mysql_error();
@@ -138,7 +138,7 @@ class threads implements tablas {
 
     static public function Update($thread) {
         $conexion = new conexion();
-        $consulta = "Call threads_UPDATE('" . $usuario->get_idthread() . "','" . $thread->get_titulo() . "','" . $thread->get_mensaje() . "','" . $thread->get_idusuario() . "'," . $thread->get_fechaalta() . ",'" . $thread->get_usuariomodif() . "')";
+        $consulta = "Call threads_UPDATE('" . $usuario->get_idthread() . "','" . $thread->get_titulo() . "','" . $thread->get_contenido() . "','" . $thread->get_idusuario() . "'," . $thread->get_fechaalta() . ",'" . $thread->get_usuariomodif() . "')";
         $result = mysql_query($consulta);
         if (!$result) {
             echo 'Error en la consulta: ' . mysql_error();
@@ -169,7 +169,7 @@ class threads implements tablas {
         $thread->set_idthreadauto($row["idThreadAuto"]);
         $thread->set_idthread($row["idThread"]);
         $thread->set_titulo($row["Titulo"]);
-        $thread->set_mensaje($row["Contenido"]);
+        $thread->set_contenido($row["Contenido"]);
         $thread->set_idusuario($row["idUusuario"]);
         $thread->set_fechaalta($row["FechaCreacion"]);
         $thread->set_fechamodif($row["FechaModificacion"]);

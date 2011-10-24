@@ -113,7 +113,7 @@ class posts implements tablas {
         $conexion = new conexion();
         $consulta = "Call posts_SELECT('" . $post->get_idpostauto() . "','" . $post->get_idpost() .
                 "','" . $post->get_idthread() . "','" . $post->get_idpostpadre() . "','" . $post->get_idusuario()
-                . "','" . $post->get_mensaje() . "'," . $post->get_fechaalta() . "," . $post->get_fechamodificacion()
+                . "','" . $post->get_contenido() . "'," . $post->get_fechaalta() . "," . $post->get_fechamodificacion()
                 . ",'" . $post->get_usuariomodif() . "','" . $post->get_votos() . "'," . $post->get_status() . ")";
         return mysql_query($consulta);
         $result = mysql_query($consulta);
@@ -126,7 +126,7 @@ class posts implements tablas {
 
     static public function Insert($post) {
         $conexion = new conexion();
-        $consulta = "Call posts_INSERT('" . $post->get_idthread() . "','" . $post->get_idpostpadre() . "','" . $post->get_idusuario() . "','" . $post->get_mensaje() . "')";
+        $consulta = "Call posts_INSERT('" . $post->get_idthread() . "','" . $post->get_idpostpadre() . "','" . $post->get_idusuario() . "','" . $post->get_contenido() . "')";
         $result = mysql_query($consulta);
         if (!$result) {
             echo 'Error en la consulta: ' . mysql_error();
@@ -138,7 +138,7 @@ class posts implements tablas {
     static public function Update($post) {
         //($idPost int, $idThread int, $idPostPadre int, $idUsuario int, $Mensaje text, $FechaAlta timestamp,$idUsuarioModificacion int)
         $conexion = new conexion();
-        $consulta = "Call posts_UPDATE('" . $post->get_idthread() . "','" . $post->get_idpostpadre() . "','" . $post->get_idusuario() . "','" . $post->get_mensaje() . "'," . $post->get_fechaalta() . ",'" . $post->get_usuariomodif() . "')";
+        $consulta = "Call posts_UPDATE('" . $post->get_idthread() . "','" . $post->get_idpostpadre() . "','" . $post->get_idusuario() . "','" . $post->get_contenido() . "'," . $post->get_fechaalta() . ",'" . $post->get_usuariomodif() . "')";
         $result = mysql_query($consulta);
         if (!$result) {
             echo 'Error en la consulta: ' . mysql_error();

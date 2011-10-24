@@ -30,11 +30,16 @@
     font-size: 8pt;
     padding-right: 10px;
 }
+
+
 .thread .user
 {
     font-size: 8pt;
-    color: #0068ff;
 }
+
+.thread .user a:link{color: #0068ff; text-decoration: none;}
+.thread .user a:visited {color: #0068ff; text-decoration: none; }
+
 .thread table
 {
     border-collapse: collapse;

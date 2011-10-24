@@ -14,12 +14,15 @@
 }
 .thread .title 
 {
+    
 }
 .thread .title a:link{color: #010101; text-decoration: none;}
 .thread .title a:visited {color: #83569d; text-decoration: none; }
 
 .thread .column
 {
+    padding-top: 10px;
+    vertical-align: top;
     padding-right: 10px;
 }
 .thread .general
@@ -38,6 +41,7 @@
 }
 .thread .column .total
 {
+    text-align: center;
     font-size: 14pt;
     color:#bababa;
 }
@@ -68,4 +72,10 @@
     background-position: center;
     background-repeat: no-repeat;
     height: 16px;
+}
+
+.thread td
+{
+    border-width: 1px;
+    border-style: solid;
 }

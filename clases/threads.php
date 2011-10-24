@@ -114,7 +114,7 @@ class threads implements tablas {
         $conexion = new conexion();
         $consulta = "Call threads_SELECT('" . $thread->get_idthreadauto() . "','" . $thread->get_idthread()
                 . "','" . $thread->get_titulo() . "','" . $thread->get_contenido() . "','" . $thread->get_idusuario()
-                . "'," . $thread->get_fechaalta() . "," . $thread->get_fechamodificacion() . ",'" . $thread->get_usuariomodif()
+                . "'," . $thread->get_fechaalta() . "," . $thread->get_fechamodificacion() . ",'" . $thread->get_usuariomodificacion()
                 . "','" . $thread->get_visitas() . "','" . $thread->get_votos() . "'," . $thread->get_status() . ")";
         return mysql_query($consulta);
         $result = mysql_query($consulta);
@@ -138,7 +138,7 @@ class threads implements tablas {
 
     static public function Update($thread) {
         $conexion = new conexion();
-        $consulta = "Call threads_UPDATE('" . $usuario->get_idthread() . "','" . $thread->get_titulo() . "','" . $thread->get_contenido() . "','" . $thread->get_idusuario() . "'," . $thread->get_fechaalta() . ",'" . $thread->get_usuariomodif() . "')";
+        $consulta = "Call threads_UPDATE('" . $usuario->get_idthread() . "','" . $thread->get_titulo() . "','" . $thread->get_contenido() . "','" . $thread->get_idusuario() . "'," . $thread->get_fechaalta() . ",'" . $thread->get_usuariomodificacion() . "')";
         $result = mysql_query($consulta);
         if (!$result) {
             echo 'Error en la consulta: ' . mysql_error();
@@ -172,8 +172,8 @@ class threads implements tablas {
         $thread->set_contenido($row["Contenido"]);
         $thread->set_idusuario($row["idUusuario"]);
         $thread->set_fechaalta($row["FechaCreacion"]);
-        $thread->set_fechamodif($row["FechaModificacion"]);
-        $thread->set_idusuariomodif($row["idUsuarioModificacion"]);
+        $thread->set_fechamodificacion($row["FechaModificacion"]);
+        $thread->set_idusuariomodificacion($row["idUsuarioModificacion"]);
         $thread->set_visitas($row["Visitas"]);
         $thread->set_votos($row["Votos"]);
         $thread->set_status($row["Status"]);

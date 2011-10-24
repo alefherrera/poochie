@@ -39,7 +39,7 @@ class posts implements tablas {
         return $this->_fechamodif;
     }
 
-    public function get_usuariomodif() {
+    public function get_usuariomodificacion() {
         return $this->_idusuariomodif;
     }
 
@@ -83,7 +83,7 @@ class posts implements tablas {
         $this->_fechamodificacion = $_fechamodif;
     }
 
-    public function set_usuariomodif($_idusuariomodif) {
+    public function set_usuariomodificacion($_idusuariomodif) {
         $this->_usuariomodif = $_idusuariomodif;
     }
 
@@ -114,7 +114,7 @@ class posts implements tablas {
         $consulta = "Call posts_SELECT('" . $post->get_idpostauto() . "','" . $post->get_idpost() .
                 "','" . $post->get_idthread() . "','" . $post->get_idpostpadre() . "','" . $post->get_idusuario()
                 . "','" . $post->get_contenido() . "'," . $post->get_fechaalta() . "," . $post->get_fechamodificacion()
-                . ",'" . $post->get_usuariomodif() . "','" . $post->get_votos() . "'," . $post->get_status() . ")";
+                . ",'" . $post->get_usuariomodificacion() . "','" . $post->get_votos() . "'," . $post->get_status() . ")";
         return mysql_query($consulta);
         $result = mysql_query($consulta);
         if (!$result) {
@@ -138,7 +138,7 @@ class posts implements tablas {
     static public function Update($post) {
         //($idPost int, $idThread int, $idPostPadre int, $idUsuario int, $Mensaje text, $FechaAlta timestamp,$idUsuarioModificacion int)
         $conexion = new conexion();
-        $consulta = "Call posts_UPDATE('" . $post->get_idthread() . "','" . $post->get_idpostpadre() . "','" . $post->get_idusuario() . "','" . $post->get_contenido() . "'," . $post->get_fechaalta() . ",'" . $post->get_usuariomodif() . "')";
+        $consulta = "Call posts_UPDATE('" . $post->get_idthread() . "','" . $post->get_idpostpadre() . "','" . $post->get_idusuario() . "','" . $post->get_contenido() . "'," . $post->get_fechaalta() . ",'" . $post->get_usuariomodificacion() . "')";
         $result = mysql_query($consulta);
         if (!$result) {
             echo 'Error en la consulta: ' . mysql_error();
@@ -173,8 +173,8 @@ class posts implements tablas {
         $post->set_idusuario($row["idUusuario"]);
         $post->set_mensaje($row["Mensaje"]);        
         $post->set_fechaalta($row["FechaCreacion"]);
-        $post->set_fechamodif($row["FechaModificacion"]);
-        $post->set_idusuariomodif($row["idUsuarioModificacion"]);
+        $post->set_fechamodificacion($row["FechaModificacion"]);
+        $post->set_idusuariomodificacion($row["idUsuarioModificacion"]);
         $post->set_votos($row["Votos"]);
         $post->set_status($row["Status"]);
         return $post;

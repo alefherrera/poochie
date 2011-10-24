@@ -1,5 +1,6 @@
-<?php
 
+<?php
+include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/clases/threads.php';
 /*
  * Valido que sea un mail valido
  */
@@ -91,4 +92,88 @@ function redir_session() {
     }
 }
 
+function mostrar_titulo_thread(){
+    $result = threads::Select(new threads);
+    
+    while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+         echo'   <div id="index_main">
+        <table class="thread">
+            <tr>
+                <td class="column">
+                    1
+                </td>
+                <td class="column">
+                    <table>
+                        <tr>
+                            <td class="up_arrow">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="total" align="center" >
+                                3200
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td class="down_arrow">
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+                <td>
+                    <!--Tabla de titulo, fecha, informacion en egeneral -->
+                    <table>
+                        <tr>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td class="positive">
+                                            +32
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        <td class="negative">
+                                            -20
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="title">
+                                <a href="'.$_SERVER['DOCUMENT_ROOT'] . '/poochie/threads/showthread.php?id='.$row['idthread'].'">'.$row['titulo'].'</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td class="user">
+                                            <a href="'.$_SERVER['DOCUMENT_ROOT'] . '/poochie/user/perfil.php?id='.$row['idusuario'].'">'.$row['nombre'].'</a> 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="general">
+                                            10 comentarios
+                                        </td>
+                                        <td class="general">
+                                            5 visitas
+                                        </td>
+                                        <td>                             <td class="general">
+                                            01/01/1995
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>';
+    }
+
+}
 ?>

@@ -12,8 +12,9 @@ if (isset($_REQUEST['submit'])) {
     $thread = new threads();
     $thread->set_idusuario($_SESSION['usuario']->get_idusuario());
     $thread->set_titulo($_REQUEST['titulo']);
-    $thread->set_mensaje($_REQUEST['mensaje']);
+    $thread->set_contenido($_REQUEST['mensaje']);
     threads::Insert($thread);
+    redir_session();
 }
 ?>
 <head>

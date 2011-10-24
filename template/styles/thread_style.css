@@ -5,7 +5,12 @@
     Description:
         Purpose of the stylesheet follows.
 */
-
+#posts_main .line
+{
+    background-image: url(../images/line.png);
+    background-position: left;
+    background-repeat: repeat-y;
+}
 .thread
 {
     font-family: sans-serif;
@@ -24,6 +29,7 @@
     padding-top: 10px;
     vertical-align: top;
     padding-right: 10px;
+    width:50px;
 }
 .thread .general
 {
@@ -86,7 +92,11 @@
     background-repeat: no-repeat;
     height: 16px;
 }
-
+.thread textarea
+{
+   width: 50%;
+   margin-left: -1px;
+}
 .thread td
 {
 }

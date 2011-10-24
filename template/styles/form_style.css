@@ -24,6 +24,7 @@
 }
 .defaultform .textbox
 {
+    font-family: monospace;
     border-style:solid;
     border-color: #bababa;
     border-width: 1px;

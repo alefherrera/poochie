@@ -180,8 +180,6 @@ class threads implements tablas {
 
         return $thread;
     }
-
 }
-
 ;
 ?>

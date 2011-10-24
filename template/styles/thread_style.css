@@ -14,7 +14,7 @@
 }
 .thread .title 
 {
-    
+
 }
 .thread .title a:link{color: #010101; text-decoration: none;}
 .thread .title a:visited {color: #83569d; text-decoration: none; }
@@ -57,6 +57,14 @@
     font-size: 8pt;
     color:#b54949;
 }
+.thread .message
+{
+    background-color: #f0efef;
+    padding:7px;
+    border-width: 1px;
+    border-color: #bababa;
+    border-style: solid;
+}
 
 .thread .column .up_arrow
 {
@@ -76,6 +84,4 @@
 
 .thread td
 {
-    border-width: 1px;
-    border-style: solid;
 }

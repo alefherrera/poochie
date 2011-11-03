@@ -98,9 +98,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
                             <td>
                                 <form name="reply" method="post">
                                     <div>
-                                        <input type="hidden" name="id" value="idPadre">
-                                        <textarea id="txtidThis" name="mensaje" rows="10" ></textarea><br />
-                                        <input id="subidThis" type="submit" name="submit" value="' . $txt['form_submit'] . '" />
+                                        <textarea id="txtidThis0" name="mensaje" rows="10" ></textarea><br />
+                                        <input id="subidThis0" type="submit" name="submit" value="' . $txt['form_submit'] . '" />
                                     </div>
                                 </form>
                             </td>
@@ -200,9 +199,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
                 <td>
                     <form name="reply" method="post">
                         <div>
-                            <input type="hidden" name="id" value="idPadre">
-                            <textarea id="txtidThis" name="mensaje" rows="10" ></textarea>
-                            <input id="subidThis" type="submit" name="submit" value="' . $txt['form_submit'] . '" />
+                            <textarea id="txtidThis" class="txtreply" name="mensaje" rows="10" ></textarea>
+                            <input id="subidThis" class="btnsubmit" type="submit" name="submit" value="' . $txt['form_submit'] . '" />
                         </div>
                     </form>
                 </td>

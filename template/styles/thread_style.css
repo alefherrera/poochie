@@ -84,12 +84,13 @@
     background-repeat: no-repeat;
     height: 16px;
 }
-.thread input
+
+.btnsubmit
 {
     display:none;
     margin-left: -2px;
 }
-.thread textarea
+.txtreply
 {
     display:none;
 }
@@ -112,6 +113,6 @@
 }
 .thread td
 {
-    border-style:solid;
-    border-width: 1px;
+    /*border-style:solid;
+    border-width: 1px;*/
 }

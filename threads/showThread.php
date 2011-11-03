@@ -4,6 +4,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
 <head>
     <link rel="stylesheet" href="/poochie/template/styles/thread_style.css" type="text/css" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="/poochie/threads/showthread.js"></script>
 </head>
 <div id="showthread_main">
     <div id="thread_main">
@@ -95,12 +96,13 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
                         </tr>
                         <tr>
                             <td>
-                                <textarea id="mensaje" name="mensaje" rows="10" tabindex="1"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>                            
-                                <input type="submit" name="submit" value="' . $txt['form_submit'] . '" tabindex="2" />
+                                <form name="reply" method="post">
+                                    <div>
+                                        <input type="hidden" name="id" value="idPadre">
+                                        <textarea id="txtidThis" name="mensaje" rows="10" ></textarea><br />
+                                        <input id="subidThis" type="submit" name="submit" value="' . $txt['form_submit'] . '" />
+                                    </div>
+                                </form>
                             </td>
                         </tr>
                     </table>
@@ -111,7 +113,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
     <!--ACA ARRANCAN LOS POSTS -->
     <div id="posts_main">
         <!--UN HIJO ES DESDE ACA-->
-        <table class="thread">
+        <table id="mesidThis" class="thread">
             <tr>
                 <td class="column">
                     <table>
@@ -184,13 +186,32 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
                                 nascetur ridiculus mus. Nulla fringilla elit eget sapien pretium auctor. Ut varius est non velit pharetra non ullamcorper risus ultrices.
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <label id="idThis" onclick="show_form(this);">' . $txt['form_reply'] . '</label>
+                            </td>
+                        </tr>
                     </table>
                 </td>
             </tr>
             <tr>
-                <td></td>
+                <td>
+                </td>
+                <td>
+                    <form name="reply" method="post">
+                        <div>
+                            <input type="hidden" name="id" value="idPadre">
+                            <textarea id="txtidThis" name="mensaje" rows="10" ></textarea>
+                            <input id="subidThis" type="submit" name="submit" value="' . $txt['form_submit'] . '" />
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            <tr>
                 <td class="line">
-                    <!--ACA IRIAN LOS HIJOS -->
+                </td>
+                <td>
+                    <!--ACA IRIAN LOS HIJOS, Recursividad de la funcion, lo de abajo se imprime despues de la función -->
                 </td>
             </tr>
         </table>

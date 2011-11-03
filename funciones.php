@@ -143,7 +143,7 @@ function mostrar_titulo_thread(){
                         </tr>
                         <tr>
                             <td colspan="4" class="title">
-                                <a href="'.$_SERVER['DOCUMENT_ROOT'] . '/poochie/threads/showthread.php?id='.$row['idthread'].'">'.$row['titulo'].'</a>
+                                <a href="'.$_SERVER['DOCUMENT_ROOT'] . '/poochie/threads/showthread.php?id='.$row['idThread'].'">'.$row['Titulo'].'</a>
                             </td>
                         </tr>
                         <tr>
@@ -151,7 +151,7 @@ function mostrar_titulo_thread(){
                                 <table>
                                     <tr>
                                         <td class="user">
-                                            <a href="'.$_SERVER['DOCUMENT_ROOT'] . '/poochie/user/perfil.php?id='.$row['idusuario'].'">'.$row['nombre'].'</a> 
+                                            <a href="'.$_SERVER['DOCUMENT_ROOT'] . '/poochie/user/perfil.php?id='.$row['idUsuario'].'">'.$row['Nombre'].'</a> 
                                         </td>
                                     </tr>
                                     <tr>

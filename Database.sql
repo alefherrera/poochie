@@ -23,7 +23,7 @@ CREATE TABLE usuarios
 CREATE PROCEDURE usuarios_SELECT($idUsuarioAuto int ,$idUsuario int ,$Nombre varchar(20),
 $Pass varchar(20),$Mail varchar(50),$FechaAlta timestamp ,$FechaModificacion timestamp,$Status bit)
 BEGIN
-        SELECT *
+        SELECT usuarios.idUsuarioAuto,usuarios.idUsuario,usuarios.Nombre,usuarios.Pass,usuarios.Mail,usuarios.FechaAlta,usuarios.FechaModificacion,usuarios.Status
         FROM usuarios WHERE
         ($idUsuarioAuto = -1 or $idUsuarioAuto = idUsuarioAuto) AND ($idUsuario =  -1 or $idUsuario = idUsuario) AND ($Nombre = '' or $Nombre = Nombre) AND ($Pass = '' or $Pass = Pass) AND 
         ($Mail = '' or $Mail = Mail) AND ($FechaAlta = 0 or $FechaAlta = FechaAlta) AND ($FechaModificacion = 0 or $FechaModificacion = FechaModificacion) AND Status = $Status;
@@ -58,16 +58,17 @@ CREATE TABLE threads
 	FechaModificacion timestamp not null,
 	idUsuarioModificacion int not null,
 	Visitas int not null,
-	Votos int not null,
+	Votosp int not null,
+        Votosn int not null,
 	Status bit not null default true,
 	constraint pk_threads PRIMARY KEY (idThreadAuto)
     #constraint fk_threads FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
 );
 #delimiter //
 CREATE PROCEDURE threads_SELECT($idThreadAuto int, $idThread int, $Titulo varchar(30), $Contenido text, $idUsuario int,	$FechaCreacion timestamp,
-$FechaModificacion timestamp, $idUsuarioModificacion int, $Visitas int, $Votos int , $Status bit)
+$FechaModificacion timestamp, $idUsuarioModificacion int, $Visitas int, $Votosp int, $Votosn int, $Status bit)
 BEGIN
-    SELECT threads.idthreadauto,threads.idthread,threads.titulo,threads.contenido,threads.idusuario,threads.fechacreacion,threads.fechamodificacion,threads.idusuariomodificacion,threads.visitas,threads.votos,threads.status,usuarios.nombre
+    SELECT threads.idThreadAuto,threads.idThread,threads.Titulo,threads.Contenido,threads.idUsuario,threads.FechaCreacion,threads.FechaModificacion,threads.idUsuarioModificacion,threads.Visitas,threads.Votosp,threads.Votosn,threads.Status,usuarios.Nombre
     FROM threads inner join usuarios on threads.idusuario = usuarios.idusuario WHERE
     ($idThreadAuto = -1 or $idThreadAuto = threads.idThreadAuto) AND ($idThread = -1 or $idThread = threads.idThread) AND ($Titulo = '' or $Titulo = threads.Titulo) AND
     ($Contenido = '' or $Contenido = Contenido) AND ($idUsuario = -1 or $idUsuario = threads.idUsuario) AND ($FechaCreacion = 0 or $FechaCreacion = threads.FechaCreacion) AND
@@ -101,11 +102,12 @@ CREATE TABLE posts
 	idThread int not null,
 	idPostPadre int not null,
 	idUsuario int not null,
-	Mensaje text not null,
+	Contenido text not null,
 	FechaCreacion timestamp not null default current_timestamp,
 	FechaModificacion timestamp not null,
 	idUsuarioModificacion int not null,
-	Votos int not null,
+	Votosp int not null,
+        Votosn int not null,
 	Status bit not null default true,
 	constraint pk_posts PRIMARY KEY (idPostAuto)
     #constraint fk_posts FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
@@ -113,22 +115,22 @@ CREATE TABLE posts
 #delimiter //
 
 CREATE PROCEDURE posts_SELECT($idPostAuto int, $idPost int, $idThread int, $idPostPadre int,
-$idUsuario int,	$Mensaje text, $FechaAlta timestamp, $FechaModificacion timestamp, $idUsuarioModificacion int, $Votos int, $Status bit)
+$idUsuario int,	$Contenido text, $FechaAlta timestamp, $FechaModificacion timestamp, $idUsuarioModificacion int, $Votos int, $Status bit)
 BEGIN
-    SELECT posts.idpostauto,posts.idpost,posts.idthread,posts.idpostpadre,posts.idusuario,posts.mensaje,posts.fechaalta,posts.fechamodificacio,posts.idusuariomodificacion,posts.votos,posts.status,usuarios.nombre
+    SELECT posts.idPostAuto,posts.idPost,posts.idThread,posts.idPostPadre,posts.idUsuario,posts.Contenido,posts.FechaAlta,posts.FechaModificacio,posts.idUsuarioModificacion,posts.Votosp,posts.Votosn,posts.Status,usuarios.Nombre
     FROM posts inner join usuarios on posts.idusuario = usuarios.idusuario WHERE
     ($idPostAuto = -1 or $idPostAuto = posts.idPostAuto) AND ($idPost = -1 or $idPost = posts.idPost) AND ($idThread = -1 or $idThread = posts.idThread)
-    AND ($idUsuario = -1 or $idUsuario = posts.idUsuario) AND ($Mensaje = '' or $Mensaje = posts.Mensaje) AND ($FechaCreacion = 0 or $FechaCreacion = posts.FechaCreacion)
+    AND ($idUsuario = -1 or $idUsuario = posts.idUsuario) AND ($Contenido = '' or $Contenido = posts.Contenido) AND ($FechaCreacion = 0 or $FechaCreacion = posts.FechaCreacion)
     AND ($FechaModificacion = 0 or $FechaModificacion = posts.FechaModificacion) AND ($idUsuarioModificacion = -1 or $idUsuarioModificacion = posts.idUsuarioModificacion)
     AND ($Votos = -1 or $Votos = posts.Votos) AND posts.Status = $Status;
 END;
-CREATE PROCEDURE posts_INSERT( $idThread int, $idPostPadre int, $idUsuario int, $Mensaje text)
+CREATE PROCEDURE posts_INSERT( $idThread int, $idPostPadre int, $idUsuario int, $Contenido text)
 BEGIN
 	INSERT INTO posts 
-	VALUES (null, -1 , $idThread, $idPostPadre, $idUsuario, $Mensaje, now(), now(), $idUsuario,0,true );
+	VALUES (null, -1 , $idThread, $idPostPadre, $idUsuario, $Contenido, now(), now(), $idUsuario,0,true );
         UPDATE posts SET idUsuario = last_insert_id() where idUsuarioAuto =  last_insert_id();
 END;
-CREATE PROCEDURE posts_UPDATE($idPost int, $idThread int, $idPostPadre int, $idUsuario int, $Mensaje text, $FechaAlta timestamp,$idUsuarioModificacion int)
+CREATE PROCEDURE posts_UPDATE($idPost int, $idThread int, $idPostPadre int, $idUsuario int, $Contenido text, $FechaAlta timestamp,$idUsuarioModificacion int)
 BEGIN
         call posts_DELETE($idusuario);
         INSERT INTO threads

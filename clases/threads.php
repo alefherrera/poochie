@@ -5,7 +5,7 @@ include_once 'tablas.php';
 
 class threads implements tablas {
 
-    private $_idthreadauto, $_idthread, $_titulo, $_contenido, $_idusuario, $_fechaalta, $_fechamodif, $_idusuariomodif, $_visitas, $_votos, $_status;
+    private $_idthreadauto, $_idthread, $_titulo, $_contenido, $_idusuario, $_fechaalta, $_fechamodif, $_idusuariomodif, $_visitas, $_votosp, $_votosn, $_status;
 
     public function get_idthreadauto() {
         return $this->_idthreadauto;
@@ -55,19 +55,19 @@ class threads implements tablas {
         $this->_fechaalta = $_fechaalta;
     }
 
-    public function get_fechamodificacion() {
+    public function get_fechamodif() {
         return $this->_fechamodif;
     }
 
-    public function set_fechamodificacion($_fechamodif) {
+    public function set_fechamodif($_fechamodif) {
         $this->_fechamodif = $_fechamodif;
     }
 
-    public function get_idusuariomodificacion() {
+    public function get_idusuariomodif() {
         return $this->_idusuariomodif;
     }
 
-    public function set_idusuariomodificacion($_idusuariomodif) {
+    public function set_idusuariomodif($_idusuariomodif) {
         $this->_idusuariomodif = $_idusuariomodif;
     }
 
@@ -79,12 +79,20 @@ class threads implements tablas {
         $this->_visitas = $_visitas;
     }
 
-    public function get_votos() {
-        return $this->_votos;
+    public function get_votosp() {
+        return $this->_votosp;
     }
 
-    public function set_votos($_votos) {
-        $this->_votos = $_votos;
+    public function set_votosp($_votosp) {
+        $this->_votosp = $_votosp;
+    }
+
+    public function get_votosn() {
+        return $this->_votosn;
+    }
+
+    public function set_votosn($_votosn) {
+        $this->_votosn = $_votosn;
     }
 
     public function get_status() {
@@ -105,7 +113,8 @@ class threads implements tablas {
         $this->_fechamodif = 0;
         $this->_idusuariomodif = -1;
         $this->_visitas = -1;
-        $this->_votos = -1;
+        $this->_votosp = -1;
+        $this->_votosn = -1;
         $this->_status = 1;
     }
 
@@ -114,8 +123,8 @@ class threads implements tablas {
         $conexion = new conexion();
         $consulta = "Call threads_SELECT('" . $thread->get_idthreadauto() . "','" . $thread->get_idthread()
                 . "','" . $thread->get_titulo() . "','" . $thread->get_contenido() . "','" . $thread->get_idusuario()
-                . "'," . $thread->get_fechaalta() . "," . $thread->get_fechamodificacion() . ",'" . $thread->get_idusuariomodificacion()
-                . "','" . $thread->get_visitas() . "','" . $thread->get_votos() . "'," . $thread->get_status() . ")";
+                . "'," . $thread->get_fechaalta() . "," . $thread->get_fechamodif() . ",'" . $thread->get_idusuariomodif()
+                . "','" . $thread->get_visitas() . "','" . $thread->get_votosp() . "','" . $thread->get_votosn() . "'," . $thread->get_status() . ")";
         return mysql_query($consulta);
         $result = mysql_query($consulta);
         if (!$result) {
@@ -138,7 +147,9 @@ class threads implements tablas {
 
     static public function Update($thread) {
         $conexion = new conexion();
-        $consulta = "Call threads_UPDATE('" . $usuario->get_idthread() . "','" . $thread->get_titulo() . "','" . $thread->get_contenido() . "','" . $thread->get_idusuario() . "'," . $thread->get_fechaalta() . ",'" . $thread->get_usuariomodificacion() . "')";
+        $consulta = "Call threads_UPDATE('" . $thead->get_idthread() . "','" . $thread->get_titulo()
+                . "','" . $thread->get_contenido() . "','" . $thread->get_idusuario() . "'," . $thread->get_fechaalta()
+                . ",'" . $thread->get_usuariomodificacion() . "','" . $thread->get_visitas() . "','" . $thread->get_votosp() . "','" . $thread->get_votosn() . "')";
         $result = mysql_query($consulta);
         if (!$result) {
             echo 'Error en la consulta: ' . mysql_error();
@@ -149,7 +160,18 @@ class threads implements tablas {
 
     static public function Delete($thread) {
         $conexion = new conexion();
-        $consulta = "Call threads_DELETE('" . $usuario->get_idthread() . "')";
+        $consulta = "Call threads_DELETE('" . $thread->get_idthread() . "')";
+        $result = mysql_query($consulta);
+        if (!$result) {
+            echo 'Error en la consulta: ' . mysql_error();
+            return false;
+        }
+        return $result;
+    }
+
+    static public function Updatevotos($thread, $voto) {
+        $conexion = new conexion();
+        $consulta = "Call threads_UPDATEVOTOS('" . $thread->get_idthread() . "','" . $voto . "')";
         $result = mysql_query($consulta);
         if (!$result) {
             echo 'Error en la consulta: ' . mysql_error();
@@ -171,15 +193,18 @@ class threads implements tablas {
         $thread->set_titulo($row["Titulo"]);
         $thread->set_contenido($row["Contenido"]);
         $thread->set_idusuario($row["idUusuario"]);
-        $thread->set_fechaalta($row["FechaCreacion"]);
-        $thread->set_fechamodificacion($row["FechaModificacion"]);
-        $thread->set_idusuariomodificacion($row["idUsuarioModificacion"]);
+        $thread->set_fechaalta($row["FechaAlta"]);
+        $thread->set_fechamodif($row["FechaModificacion"]);
+        $thread->set_idusuariomodif($row["idUsuarioModificacion"]);
         $thread->set_visitas($row["Visitas"]);
-        $thread->set_votos($row["Votos"]);
+        $thread->set_votosp($row["Votosp"]);
+        $thread->set_votosn($row["Votosn"]);
         $thread->set_status($row["Status"]);
 
         return $thread;
     }
+
 }
+
 ;
 ?>

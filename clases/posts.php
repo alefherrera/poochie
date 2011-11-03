@@ -7,6 +7,7 @@ class posts implements tablas {
 
     private $_idpostauto, $_idpost, $_idthread, $_idpostpadre, $_idusuario, $_contenido, $_fechaalta, $_fechamodif, $_idusuariomodif, $_votosp, $_votosn, $_status;
 
+// <editor-fold defaultstate="collapsed" desc="Gets y Sets">
     public function get_idpostauto() {
         return $this->_idpostauto;
     }
@@ -103,6 +104,8 @@ class posts implements tablas {
         $this->_status = $_status;
     }
 
+    // </editor-fold>
+
     function __construct() {
         $this->_idpostauto = -1;
         $this->_idpost = -1;
@@ -118,13 +121,13 @@ class posts implements tablas {
         $this->_status = 1;
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Select, Insert, Update, Delete, Load">
     static public function Select($post) {
         $conexion = new conexion();
         $consulta = "Call posts_SELECT('" . $post->get_idpostauto() . "','" . $post->get_idpost() .
                 "','" . $post->get_idthread() . "','" . $post->get_idpostpadre() . "','" . $post->get_idusuario()
                 . "','" . $post->get_contenido() . "'," . $post->get_fechaalta() . "," . $post->get_fechamodif()
                 . ",'" . $post->get_idusuariomodif() . "','" . $post->get_votosp() . "','" . $post->get_votosn() . "'," . $post->get_status() . ")";
-        return mysql_query($consulta);
         $result = mysql_query($consulta);
         if (!$result) {
             echo 'Error en la consulta: ' . mysql_error();
@@ -202,6 +205,7 @@ class posts implements tablas {
         return $post;
     }
 
+    // </editor-fold>
 }
 
 ;

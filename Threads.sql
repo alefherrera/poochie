@@ -10,7 +10,7 @@ CREATE TABLE threads
 	idUsuarioModificacion int not null,
 	Visitas int not null,
 	Votosp int not null,
-    Votosn int not null,
+        Votosn int not null,
 	Status bit not null default true,
 	constraint pk_threads PRIMARY KEY (idThreadAuto)
 );
@@ -23,13 +23,13 @@ BEGIN
     ($idThreadAuto = -1 or $idThreadAuto = threads.idThreadAuto) AND ($idThread = -1 or $idThread = threads.idThread) AND ($Titulo = '' or $Titulo = threads.Titulo) AND
     ($Contenido = '' or $Contenido = Contenido) AND ($idUsuario = -1 or $idUsuario = threads.idUsuario) AND ($FechaAlta = 0 or $FechaAlta = threads.FechaAlta) AND
     ($FechaModificacion = 0 or $FechaModificacion = threads.FechaModificacion) AND ($idUsuarioModificacion = -1 or $idUsuarioModificacion = threads.idUsuarioModificacion)AND 
-    ($Visitas = -1 or $Visitas = threads.Visitas) AND ($Votos = -1 or $Votos = threads.Votos) AND threads.Status = $Status;
+    ($Visitas = -1 or $Visitas = threads.Visitas) AND ($Votosp = -1 or $Votosp = threads.Votosp) AND ($Votosn = -1 or $Votosn = threads.Votosn) AND threads.Status = $Status;
 END;
 
 CREATE PROCEDURE threads_INSERT( $Titulo varchar(20), $Contenido text, $idUsuario int)
 BEGIN
 	INSERT INTO threads 
-	VALUES (null, -1 ,$Titulo, $Contenido, $idUsuario, now(), now(), $idUsuario, 0, 0, true);
+	VALUES (null, -1 ,$Titulo, $Contenido, $idUsuario, now(), now(), $idUsuario, 0, 0, 0, true);
         UPDATE threads SET idThread = last_insert_id() where idThreadAuto =  last_insert_id();
 END;
 

@@ -6,7 +6,8 @@ include_once 'tablas.php';
 class usuarios implements tablas {
 
     private $_idusuarioauto, $_idusuario, $_nombre, $_pass, $_mail, $_fechaalta, $_fechamodif, $_status;
-
+    
+// <editor-fold defaultstate="collapsed" desc="Gets y Sets">
     public function get_idusuarioauto() {
         return $this->_idusuarioauto;
     }
@@ -70,7 +71,8 @@ class usuarios implements tablas {
     public function set_status($_status) {
         $this->_status = $_status;
     }
-
+    // </editor-fold>
+    
     function __construct() {
         $this->_idusuarioauto = -1;
         $this->_idusuario = -1;
@@ -82,12 +84,12 @@ class usuarios implements tablas {
         $this->_status = 1;
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Select, Insert, Update, Delete, Load">
     static public function Select($usuario) {
         $conexion = new conexion();
         $consulta = "Call usuarios_SELECT('" . $usuario->get_idusuarioauto() . "','" . $usuario->get_idusuario() . "','"
                 . $usuario->get_nombre() . "','" . $usuario->get_pass() . "','" . $usuario->get_mail() . "',"
                 . $usuario->get_fechaalta() . "," . $usuario->get_fechamodificacion() . "," . $usuario->get_status() . ")";
-        return mysql_query($consulta);
         $result = mysql_query($consulta);
         if (!$result) {
             echo 'Error en la consulta: ' . mysql_error();
@@ -152,7 +154,7 @@ class usuarios implements tablas {
 
         return $usuario;
     }
-
+    // </editor-fold>
 }
 
 ;

@@ -23,13 +23,13 @@ BEGIN
     ($idPostAuto = -1 or $idPostAuto = posts.idPostAuto) AND ($idPost = -1 or $idPost = posts.idPost) AND ($idThread = -1 or $idThread = posts.idThread)
     AND ($idUsuario = -1 or $idUsuario = posts.idUsuario) AND ($Contenido = '' or $Contenido = posts.Contenido) AND ($FechaAlta = 0 or $FechaAlta = posts.FechaAlta)
     AND ($FechaModificacion = 0 or $FechaModificacion = posts.FechaModificacion) AND ($idUsuarioModificacion = -1 or $idUsuarioModificacion = posts.idUsuarioModificacion)
-    AND ($Votos = -1 or $Votos = posts.Votos) AND posts.Status = $Status;
+    AND ($Votosp = -1 or $Votosp = threads.Votosp) AND ($Votosn = -1 or $Votosn = threads.Votosn) AND posts.Status = $Status;
 END;
 
 CREATE PROCEDURE posts_INSERT( $idThread int, $idPostPadre int, $idUsuario int, $Contenido text)
 BEGIN
 	INSERT INTO posts 
-	VALUES (null, -1 , $idThread, $idPostPadre, $idUsuario, $Contenido, now(), now(), $idUsuario,0,true );
+	VALUES (null, -1 , $idThread, $idPostPadre, $idUsuario, $Contenido, now(), now(), $idUsuario, 0, 0,true );
         UPDATE posts SET idUsuario = last_insert_id() where idUsuarioAuto =  last_insert_id();
 END;
 

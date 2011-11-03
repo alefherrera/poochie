@@ -7,6 +7,9 @@ class threads implements tablas {
 
     private $_idthreadauto, $_idthread, $_titulo, $_contenido, $_idusuario, $_fechaalta, $_fechamodif, $_idusuariomodif, $_visitas, $_votosp, $_votosn, $_status;
 
+// <editor-fold defaultstate="collapsed" desc="Gets y Sets">
+
+
     public function get_idthreadauto() {
         return $this->_idthreadauto;
     }
@@ -103,6 +106,8 @@ class threads implements tablas {
         $this->_status = $_status;
     }
 
+    // </editor-fold>
+
     function __construct() {
         $this->_idthreadauto = -1;
         $this->_idthread = -1;
@@ -118,6 +123,7 @@ class threads implements tablas {
         $this->_status = 1;
     }
 
+// <editor-fold defaultstate="collapsed" desc="Select, Insert, Update, Delete, Load">
     static public function Select($thread) {
 
         $conexion = new conexion();
@@ -125,7 +131,6 @@ class threads implements tablas {
                 . "','" . $thread->get_titulo() . "','" . $thread->get_contenido() . "','" . $thread->get_idusuario()
                 . "'," . $thread->get_fechaalta() . "," . $thread->get_fechamodif() . ",'" . $thread->get_idusuariomodif()
                 . "','" . $thread->get_visitas() . "','" . $thread->get_votosp() . "','" . $thread->get_votosn() . "'," . $thread->get_status() . ")";
-        return mysql_query($consulta);
         $result = mysql_query($consulta);
         if (!$result) {
             echo 'Error en la consulta: ' . mysql_error();
@@ -204,6 +209,7 @@ class threads implements tablas {
         return $thread;
     }
 
+    // </editor-fold>
 }
 
 ;

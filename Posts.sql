@@ -16,14 +16,14 @@ CREATE TABLE posts
 );
 
 CREATE PROCEDURE posts_SELECT($idPostAuto int, $idPost int, $idThread int, $idPostPadre int,
-$idUsuario int,	$Contenido text, $FechaAlta timestamp, $FechaModificacion timestamp, $idUsuarioModificacion int, $Votos int, $Status bit)
+$idUsuario int,	$Contenido text, $FechaAlta timestamp, $FechaModificacion timestamp, $idUsuarioModificacion int, $Votosp int, $Votosn int, $Status bit)
 BEGIN
-    SELECT posts.idPostAuto,posts.idPost,posts.idThread,posts.idPostPadre,posts.idUsuario,posts.Contenido,posts.FechaAlta,posts.FechaModificacio,posts.idUsuarioModificacion,posts.Votosp,posts.Votosn,posts.Status,usuarios.Nombre
+    SELECT posts.idPostAuto,posts.idPost,posts.idThread,posts.idPostPadre,posts.idUsuario,posts.Contenido,posts.FechaAlta,posts.FechaModificacion,posts.idUsuarioModificacion,posts.Votosp,posts.Votosn,posts.Status,usuarios.Nombre
     FROM posts inner join usuarios on posts.idusuario = usuarios.idusuario WHERE
     ($idPostAuto = -1 or $idPostAuto = posts.idPostAuto) AND ($idPost = -1 or $idPost = posts.idPost) AND ($idThread = -1 or $idThread = posts.idThread)
     AND ($idUsuario = -1 or $idUsuario = posts.idUsuario) AND ($Contenido = '' or $Contenido = posts.Contenido) AND ($FechaAlta = 0 or $FechaAlta = posts.FechaAlta)
     AND ($FechaModificacion = 0 or $FechaModificacion = posts.FechaModificacion) AND ($idUsuarioModificacion = -1 or $idUsuarioModificacion = posts.idUsuarioModificacion)
-    AND ($Votosp = -1 or $Votosp = threads.Votosp) AND ($Votosn = -1 or $Votosn = threads.Votosn) AND posts.Status = $Status;
+    AND ($Votosp = -1 or $Votosp = posts.Votosp) AND ($Votosn = -1 or $Votosn = posts.Votosn) AND posts.Status = $Status;
 END;
 
 CREATE PROCEDURE posts_INSERT( $idThread int, $idPostPadre int, $idUsuario int, $Contenido text)

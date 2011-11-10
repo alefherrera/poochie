@@ -1,6 +1,8 @@
 
 <?php
+
 include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/clases/threads.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/clases/posts.php';
 /*
  * Valido que sea un mail valido
  */
@@ -92,11 +94,11 @@ function redir_session() {
     }
 }
 
-function mostrar_titulo_thread(){
+function mostrar_titulo_thread() {
     $result = threads::Select(new threads);
-    
+
     while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-         echo'   <div id="index_main">
+        echo'   <div id="index_main">
         <table class="thread">
             <tr>
                 <td class="column">
@@ -143,7 +145,7 @@ function mostrar_titulo_thread(){
                         </tr>
                         <tr>
                             <td colspan="4" class="title">
-                                <a href="'.$_SERVER['DOCUMENT_ROOT'] . '/poochie/threads/showthread.php?id='.$row['idThread'].'">'.$row['Titulo'].'</a>
+                                <a href="/poochie/threads/showthread.php?id=' . $row['idThread'] . '">' . $row['Titulo'] . '</a>
                             </td>
                         </tr>
                         <tr>
@@ -151,7 +153,7 @@ function mostrar_titulo_thread(){
                                 <table>
                                     <tr>
                                         <td class="user">
-                                            <a href="'.$_SERVER['DOCUMENT_ROOT'] . '/poochie/user/perfil.php?id='.$row['idUsuario'].'">'.$row['Nombre'].'</a> 
+                                            <a href="/poochie/user/perfil.php?id=' . $row['idUsuario'] . '">' . $row['Nombre'] . '</a> 
                                         </td>
                                     </tr>
                                     <tr>
@@ -174,6 +176,108 @@ function mostrar_titulo_thread(){
         </table>
     </div>';
     }
-
 }
+
+function getpost($idthread, $idpadre) {
+    $post = new posts();
+    $post->set_idthread($idthread);
+    $post->set_idpostpadre($idpadre);
+
+    $result = posts::Select($post);
+  //  if(!$result)
+    //    exit;
+    while ($row = mysql_fetch_array($result, MYSQLI_ASSOC)) {
+        echo'<table id="mesidThis" class="thread">
+            <tr>
+                <td class="column">
+                    <table>
+                        <tr>
+                            <td class="up_arrow">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="total">
+                                3200
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="down_arrow">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <!--Tabla de titulo, fecha, informacion en egeneral -->
+                    <table class="table_message">
+                        <tr>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td class="positive">
+                                            '.$row['Votosp'].'
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        <td class="negative">
+                                            '.$row['Votosn'].'
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td class="user">
+                                            '.$row['Nombre'].'
+                                        </td>
+                                    </tr>
+                                    <tr>                            
+                                        <td class="general">
+                                        '.$row['FechaAlta'].'
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="contenido">
+                                '.$row['Contenido'].'
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label id="'. $row['idPost'].'" onclick="show_form(this);"> . $txt[form_reply] . </label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <form name="reply" method="post">
+                        <div>
+                            <input type=hidden name="idPostPadre" value="'.$row['idPost'].'">
+                            <textarea id="txt'.$row['idPost'].'" class="txtreply" name="mensaje" rows="10" ></textarea>
+                            <input id="sub'.$row['idPost'].'" class="btnsubmit" type="submit" name="submit" value=" . $txt[form_submit] . " />
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td class="line">
+                </td>
+                <td>';
+        getpost($row['idThread'], $row['idPost']);
+        //ACA IRIAN LOS HIJOS, Recursividad de la funcion, lo de abajo se imprime despues de la función -->
+        echo' </td>
+            </tr>
+        </table>';
+    }
+}
+
 ?>

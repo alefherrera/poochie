@@ -11,16 +11,25 @@
     background-position: left;
     background-repeat: repeat-y;
 }
+
+.table_message
+{
+    width:100%;
+}
+
 .thread
 {
+    width:100%;
     font-family: sans-serif;
     border-collapse: collapse;
     margin-top: 15px;
 }
+
 .thread .title 
 {
 
 }
+
 .thread .title a:link{color: #010101; text-decoration: none;}
 .thread .title a:visited {color: #83569d; text-decoration: none; }
 
@@ -68,7 +77,7 @@
     font-size: 8pt;
     color:#b54949;
 }
-.thread .message
+.thread .contenido
 {
     background-color: #f0efef;
     padding:7px;
@@ -84,13 +93,17 @@
     background-repeat: no-repeat;
     height: 16px;
 }
+#showthread_main .txtreply
+{
+    margin-top: 15px;
+}
 
-.btnsubmit
+#posts_main .btnsubmit
 {
     display:none;
     margin-left: -2px;
 }
-.txtreply
+#posts_main .txtreply
 {
     display:none;
 }

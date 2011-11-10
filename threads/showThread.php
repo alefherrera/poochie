@@ -1,7 +1,23 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
-?>
-<head>
+
+$thread = new threads();
+$thread->set_idthread($_REQUEST['id']);
+$thread = threads::Load($thread);
+
+if(isset($_REQUEST['submit'])){
+    //Aca se validan boludeces
+    $post = new posts();
+    $post->set_contenido($_REQUEST['mensaje']);
+    $post->set_idpostpadre($_REQUEST['idPostPadre']);
+    $post->set_idusuario($_SESSION['usuario']->get_idUsuario());
+    $post->set_idthread($_REQUEST['id']);
+    
+    posts::Insert($post);
+    
+}
+
+echo'<head>
     <link rel="stylesheet" href="/poochie/template/styles/thread_style.css" type="text/css" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="/poochie/threads/showthread.js"></script>
@@ -30,7 +46,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
                 </td>
                 <td>
                     <!--Tabla de titulo, fecha, informacion en egeneral -->
-                    <table>
+                    <table class="table_message">
                         <tr>
                             <td>
                                 <table>
@@ -50,7 +66,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
                         </tr>
                         <tr>
                             <td colspan="4" class="title">
-                                <a href="/poochie/index.php">"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."</a>
+                                <a href="/poochie/index.php">'.$thread->get_titulo().'</a>
                             </td>
                         </tr>
                         <tr>
@@ -58,7 +74,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
                                 <table>
                                     <tr>
                                         <td class="user">
-                                            usuario
+                                            '.$thread->get_nombre().'
                                         </td>
                                     </tr>
                                     <tr>
@@ -70,36 +86,24 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
                                         </td>
                                         <td>                             
                                         <td class="general">
-                                            01/01/1995
+                                            '.$thread->get_fechaalta().'
                                         </td>
                                     </tr>
                                 </table>
                             </td>
                         </tr>
                         <tr>
-                            <td class="message">
-                                Vestibulum augue risus, euismod eget dignissim eu, molestie vitae urna. Cras venenatis elementum interdum. In euismod purus ut 
-                                risus sodales eu sodales eros ullamcorper. Etiam pharetra sollicitudin diam. Integer mauris eros, ultricies ut aliquet id, pharetra a 
-                                urna. Mauris tristique porttitor velit vitae imperdiet. Morbi mattis magna vitae magna condimentum feugiat dignissim lacus convallis. 
-                                Donec felis libero, fermentum at commodo vitae, molestie id purus. Mauris sapien est, dignissim at consequat ut, luctus nec lectus. 
-                                Ut tempus eros eu ante auctor volutpat malesuada sem pretium. Fusce in erat sed risus ultrices viverra. Curabitur ullamcorper, tortor 
-                                eu lobortis consequat, dolor erat gravida turpis, at euismod augue tortor interdum orci. Ut a dui dui, ac auctor dui. Phasellus pulvinar 
-                                pellentesque odio, non eleifend velit tempor sed.<br></br>
-                                Nam vel nulla leo, sit amet hendrerit enim. Suspendisse egestas enim non neque convallis ac scelerisque purus porttitor. 
-                                Praesent nibh justo, luctus vel pulvinar nec, semper eget urna. Integer et turpis nec dui posuere porta sit amet id dolor. 
-                                Quisque pellentesque rhoncus sem sed luctus. Cras vel erat nec sem lacinia eleifend. Donec id justo neque. Donec et nulla 
-                                ipsum. Aenean et lorem nec odio laoreet rhoncus. Aliquam fringilla, tellus eget imperdiet imperdiet, libero dui pretium arcu, 
-                                ut dignissim nunc orci sit amet mi. Aenean a risus mi, in tempor elit. Donec vulputate justo non arcu bibendum mattis in et 
-                                . Pellentesque sapien elit, auctor vel placerat at, feugiat et odio. Cum sociis natoque penatibus et magnis dis parturient montes, 
-                                nascetur ridiculus mus. Nulla fringilla elit eget sapien pretium auctor. Ut varius est non velit pharetra non ullamcorper risus ultrices.
+                            <td class="contenido">
+                             '.$thread->get_contenido().'   
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <form name="reply" method="post">
                                     <div>
-                                        <textarea id="txtidThis0" name="mensaje" rows="10" ></textarea><br />
-                                        <input id="subidThis0" type="submit" name="submit" value="' . $txt['form_submit'] . '" />
+                                        <input type=hidden name="idPostPadre" value="0">
+                                        <textarea class="txtreply" id="txt0" name="mensaje" rows="10" ></textarea><br />
+                                        <input class="btnsubmit" id="sub0" type="submit" name="submit" value=" . $txt[form_submit] . " />
                                     </div>
                                 </form>
                             </td>
@@ -110,113 +114,13 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
         </table>
     </div>
     <!--ACA ARRANCAN LOS POSTS -->
-    <div id="posts_main">
-        <!--UN HIJO ES DESDE ACA-->
-        <table id="mesidThis" class="thread">
-            <tr>
-                <td class="column">
-                    <table>
-                        <tr>
-                            <td class="up_arrow">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="total">
-                                3200
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="down_arrow">
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <!--Tabla de titulo, fecha, informacion en egeneral -->
-                    <table id="table_message">
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td class="positive">
-                                            +32
-                                        </td>
-                                        <td>
-                                            /
-                                        </td>
-                                        <td class="negative">
-                                            -20
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td class="user">
-                                            usuario
-                                        </td>
-                                    </tr>
-                                    <tr>                            
-                                        <td class="general">
-                                            01/01/1995
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="message">
-                                Vestibulum augue risus, euismod eget dignissim eu, molestie vitae urna. Cras venenatis elementum interdum. In euismod purus ut 
-                                risus sodales eu sodales eros ullamcorper. Etiam pharetra sollicitudin diam. Integer mauris eros, ultricies ut aliquet id, pharetra a 
-                                urna. Mauris tristique porttitor velit vitae imperdiet. Morbi mattis magna vitae magna condimentum feugiat dignissim lacus convallis. 
-                                Donec felis libero, fermentum at commodo vitae, molestie id purus. Mauris sapien est, dignissim at consequat ut, luctus nec lectus. 
-                                Ut tempus eros eu ante auctor volutpat malesuada sem pretium. Fusce in erat sed risus ultrices viverra. Curabitur ullamcorper, tortor 
-                                eu lobortis consequat, dolor erat gravida turpis, at euismod augue tortor interdum orci. Ut a dui dui, ac auctor dui. Phasellus pulvinar 
-                                pellentesque odio, non eleifend velit tempor sed.<br></br>
-                                Nam vel nulla leo, sit amet hendrerit enim. Suspendisse egestas enim non neque convallis ac scelerisque purus porttitor. 
-                                Praesent nibh justo, luctus vel pulvinar nec, semper eget urna. Integer et turpis nec dui posuere porta sit amet id dolor. 
-                                Quisque pellentesque rhoncus sem sed luctus. Cras vel erat nec sem lacinia eleifend. Donec id justo neque. Donec et nulla 
-                                ipsum. Aenean et lorem nec odio laoreet rhoncus. Aliquam fringilla, tellus eget imperdiet imperdiet, libero dui pretium arcu, 
-                                ut dignissim nunc orci sit amet mi. Aenean a risus mi, in tempor elit. Donec vulputate justo non arcu bibendum mattis in et 
-                                . Pellentesque sapien elit, auctor vel placerat at, feugiat et odio. Cum sociis natoque penatibus et magnis dis parturient montes, 
-                                nascetur ridiculus mus. Nulla fringilla elit eget sapien pretium auctor. Ut varius est non velit pharetra non ullamcorper risus ultrices.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label id="idThis" onclick="show_form(this);">' . $txt['form_reply'] . '</label>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                </td>
-                <td>
-                    <form name="reply" method="post">
-                        <div>
-                            <textarea id="txtidThis" class="txtreply" name="mensaje" rows="10" ></textarea>
-                            <input id="subidThis" class="btnsubmit" type="submit" name="submit" value="' . $txt['form_submit'] . '" />
-                        </div>
-                    </form>
-                </td>
-            </tr>
-            <tr>
-                <td class="line">
-                </td>
-                <td>
-                    <!--ACA IRIAN LOS HIJOS, Recursividad de la funcion, lo de abajo se imprime despues de la función -->
-                </td>
-            </tr>
-        </table>
-        <!--EL HIJO TERMINA ACA-->
-    </div>
-</div>
-
+    <div id="posts_main">';
+       // <!--UN HIJO ES DESDE ACA-->
+        getpost($thread->get_idthread(),0);
+      //  <!--EL HIJO TERMINA ACA-->
+    echo'</div>
+</div>';
+?>
 
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/footer.php';

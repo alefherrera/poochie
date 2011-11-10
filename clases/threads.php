@@ -5,7 +5,7 @@ include_once 'tablas.php';
 
 class threads implements tablas {
 
-    private $_idthreadauto, $_idthread, $_titulo, $_contenido, $_idusuario, $_fechaalta, $_fechamodif, $_idusuariomodif, $_visitas, $_votosp, $_votosn, $_status;
+    private $_idthreadauto, $_idthread, $_titulo, $_contenido, $_idusuario, $_fechaalta, $_fechamodif, $_idusuariomodif, $_visitas, $_votosp, $_votosn, $_status, $_nombre;
 
 // <editor-fold defaultstate="collapsed" desc="Gets y Sets">
 
@@ -105,6 +105,15 @@ class threads implements tablas {
     public function set_status($_status) {
         $this->_status = $_status;
     }
+    
+        public function get_nombre() {
+        return $this->_nombre;
+    }
+    
+        public function set_nombre($_nombre) {
+        $this->_nombre = $_nombre;
+    }
+    
 
     // </editor-fold>
 
@@ -197,7 +206,7 @@ class threads implements tablas {
         $thread->set_idthread($row["idThread"]);
         $thread->set_titulo($row["Titulo"]);
         $thread->set_contenido($row["Contenido"]);
-        $thread->set_idusuario($row["idUusuario"]);
+        $thread->set_idusuario($row["idUsuario"]);
         $thread->set_fechaalta($row["FechaAlta"]);
         $thread->set_fechamodif($row["FechaModificacion"]);
         $thread->set_idusuariomodif($row["idUsuarioModificacion"]);
@@ -205,6 +214,7 @@ class threads implements tablas {
         $thread->set_votosp($row["Votosp"]);
         $thread->set_votosn($row["Votosn"]);
         $thread->set_status($row["Status"]);
+        $thread->set_nombre($row["Nombre"]);
 
         return $thread;
     }

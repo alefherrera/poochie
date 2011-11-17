@@ -17,6 +17,10 @@ if (isset($_REQUEST['submit'])){
         $_SESSION['usuario'] = $usuario;
         redir_session();
     }
+    else
+    {
+        echo "<script language=JavaScript>alert('Usuario o Password incorrecto');</script>";
+    }
     
 }
 

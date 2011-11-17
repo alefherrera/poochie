@@ -8,13 +8,19 @@ if (!islogged()){
 }
 
 //Si apreto en enviar
-if (isset($_REQUEST['submit'])) {
-    $thread = new threads();
-    $thread->set_idusuario($_SESSION['usuario']->get_idusuario());
-    $thread->set_titulo($_REQUEST['titulo']);
-    $thread->set_contenido($_REQUEST['mensaje']);
-    threads::Insert($thread);
-    redir_session();
+if (isset($_SESSION['usuario'])){
+    if (isset($_REQUEST['submit'])) {
+        $thread = new threads();
+        $thread->set_idusuario($_SESSION['usuario']->get_idusuario());
+        $thread->set_titulo($_REQUEST['titulo']);
+        $thread->set_contenido($_REQUEST['mensaje']);
+        threads::Insert($thread);
+        redir_session();
+        }
+}
+else
+{
+    echo "<script language=JavaScript>alert('No esta conectado.');</script>";
 }
 ?>
 <head>

@@ -1,21 +1,31 @@
 <?php
+
 include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/language/spanish/showthread.spanish.php';
 
 $thread = new threads();
 $thread->set_idthread($_REQUEST['id']);
 $thread = threads::Load($thread);
 
-if(isset($_REQUEST['submit'])){
-    //Aca se validan boludeces
-    $post = new posts();
-    $post->set_contenido($_REQUEST['mensaje']);
-    $post->set_idpostpadre($_REQUEST['idPostPadre']);
-    $post->set_idusuario($_SESSION['usuario']->get_idUsuario());
-    $post->set_idthread($_REQUEST['id']);
-    
-    posts::Insert($post);
-    
+
+if (isset($_REQUEST['submit'])) {
+    if (islogged()) {
+        //Aca se validan boludeces
+        $post = new posts();
+        $post->set_contenido($_REQUEST['mensaje']);
+        $post->set_idpostpadre($_REQUEST['idPostPadre']);
+        $post->set_idusuario($_SESSION['usuario']->get_idUsuario());
+        $post->set_idthread($_REQUEST['id']);
+
+        posts::Insert($post);
+    } else {
+        echo "<script language=JavaScript>alert('No esta conectado.');</script>";
+        echo '<meta http-equiv="Refresh" content="0;url=/poochie/login/login.php">';
+        exit;
+    }
 }
+
+
 
 echo'<head>
     <link rel="stylesheet" href="/poochie/template/styles/thread_style.css" type="text/css" />
@@ -66,7 +76,7 @@ echo'<head>
                         </tr>
                         <tr>
                             <td colspan="4" class="title">
-                                <a href="/poochie/index.php">'.$thread->get_titulo().'</a>
+                                <a href="/poochie/index.php">' . $thread->get_titulo() . '</a>
                             </td>
                         </tr>
                         <tr>
@@ -74,7 +84,7 @@ echo'<head>
                                 <table>
                                     <tr>
                                         <td class="user">
-                                            '.$thread->get_nombre().'
+                                            ' . $thread->get_nombre() . '
                                         </td>
                                     </tr>
                                     <tr>
@@ -86,7 +96,7 @@ echo'<head>
                                         </td>
                                         <td>                             
                                         <td class="general">
-                                            '.$thread->get_fechaalta().'
+                                            ' . $thread->get_fechaalta() . '
                                         </td>
                                     </tr>
                                 </table>
@@ -94,7 +104,7 @@ echo'<head>
                         </tr>
                         <tr>
                             <td class="contenido">
-                             '.$thread->get_contenido().'   
+                             ' . $thread->get_contenido() . '   
                             </td>
                         </tr>
                         <tr>
@@ -103,7 +113,7 @@ echo'<head>
                                     <div>
                                         <input type=hidden name="idPostPadre" value="0">
                                         <textarea class="txtreply" id="txt0" name="mensaje" rows="10" ></textarea><br />
-                                        <input class="btnsubmit" id="sub0" type="submit" name="submit" value=" . $txt[form_submit] . " />
+                                        <input class="btnsubmit" id="sub0" type="submit" name="submit" value="' . $txt['form_submit'] . '" />
                                     </div>
                                 </form>
                             </td>
@@ -115,13 +125,14 @@ echo'<head>
     </div>
     <!--ACA ARRANCAN LOS POSTS -->
     <div id="posts_main">';
-       // <!--UN HIJO ES DESDE ACA-->
-        getpost($thread->get_idthread(),0);
-      //  <!--EL HIJO TERMINA ACA-->
-    echo'</div>
+// <!--UN HIJO ES DESDE ACA-->
+getpost($thread->get_idthread(), 0);
+//  <!--EL HIJO TERMINA ACA-->
+echo'</div>
 </div>';
 ?>
 
 <?php
+
 include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/footer.php';
 ?>

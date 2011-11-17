@@ -3,6 +3,7 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/clases/threads.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/clases/posts.php';
+
 /*
  * Valido que sea un mail valido
  */
@@ -179,10 +180,12 @@ function mostrar_titulo_thread() {
 }
 
 function getpost($idthread, $idpadre) {
+    
     $post = new posts();
     $post->set_idthread($idthread);
     $post->set_idpostpadre($idpadre);
-
+$txt['form_reply'] = 'Responder';
+$txt['form_submit'] = 'Enviar';
     $result = posts::Select($post);
   //  if(!$result)
     //    exit;
@@ -249,7 +252,7 @@ function getpost($idthread, $idpadre) {
                         </tr>
                         <tr>
                             <td>
-                                <label id="'. $row['idPost'].'" onclick="show_form(this);"> . $txt[form_reply] . </label>
+                                <label id="'. $row['idPost'].'" onclick="show_form(this);">' . $txt['form_reply'] . '</label>
                             </td>
                         </tr>
                     </table>
@@ -263,7 +266,7 @@ function getpost($idthread, $idpadre) {
                         <div>
                             <input type=hidden name="idPostPadre" value="'.$row['idPost'].'">
                             <textarea id="txt'.$row['idPost'].'" class="txtreply" name="mensaje" rows="10" ></textarea>
-                            <input id="sub'.$row['idPost'].'" class="btnsubmit" type="submit" name="submit" value=" . $txt[form_submit] . " />
+                            <input id="sub'.$row['idPost'].'" class="btnsubmit" type="submit" name="submit" value="' . $txt['form_submit'] . '" />
                         </div>
                     </form>
                 </td>

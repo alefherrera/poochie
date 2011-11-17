@@ -2,7 +2,7 @@
 include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/language/spanish/register.spanish.php';
 
-if(islogged()){
+if (islogged()) {
     redir_session();
 }
 if (isset($_REQUEST['submit'])) {
@@ -20,9 +20,22 @@ if (isset($_REQUEST['submit'])) {
         $valido = false;
     if ($valido) {
         $usuario->set_nombre($_REQUEST['user']);
-        $usuario->set_pass($_REQUEST['password']);
-        $usuario->set_mail($_REQUEST['mail']);
-        usuarios::Insert($usuario);
+        //usuarios::Select($usuario);
+        if (mysql_num_rows(usuarios::Select($usuario)) == 0) {
+            $usuario->set_pass($_REQUEST['password']);
+            $usuario->set_mail($_REQUEST['mail']);
+            if (usuarios::Insert($usuario)) {
+                $usuario = usuarios::Load($usuario);
+                $_SESSION['usuario'] = $usuario;
+                echo '<meta http-equiv="Refresh" content="0;url=/poochie/index.php">';
+                exit;
+            }
+        } else {
+            echo "<script language=JavaScript>alert('Usuario existente.');</script>";
+            echo '<meta http-equiv="Refresh" content="0;url=/poochie/login/register.php">';
+            exit;
+        }
+        //FALTA DEVOLVER ID EN INSERT PARA INICIAR SESSION
     }
 }
 ?>

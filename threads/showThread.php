@@ -4,7 +4,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/template/header.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/poochie/language/spanish/showthread.spanish.php';
 
 $thread = new threads();
-$thread->set_idthread($_REQUEST['id']);
+$thread->set_idthread($_REQUEST['id']); // ME TENGO QUE FIJAR SI EXISTE
 $thread = threads::Load($thread);
 
 
@@ -25,7 +25,9 @@ if (isset($_REQUEST['submit'])) {
     }
 }
 
-
+$votos = $thread->get_votosp() - $thread->get_votosn();
+$comentarios = count_post($thread->get_idthread());
+if(!$comentarios) $comentarios = 0;
 
 echo'<head>
     <link rel="stylesheet" href="/poochie/template/styles/thread_style.css" type="text/css" />
@@ -44,7 +46,7 @@ echo'<head>
                         </tr>
                         <tr>
                             <td class="total">
-                                3200
+                                '. $votos .'
                             </td>
                         </tr>
                         <tr>
@@ -62,13 +64,13 @@ echo'<head>
                                 <table>
                                     <tr>
                                         <td class="positive">
-                                            +32
+                                            +'.$thread->get_votosp().'
                                         </td>
                                         <td>
                                             /
                                         </td>
                                         <td class="negative">
-                                            -20
+                                            -'.$thread->get_votosn().'
                                         </td>
                                     </tr>
                                 </table>
@@ -84,12 +86,12 @@ echo'<head>
                                 <table>
                                     <tr>
                                         <td class="user">
-                                            ' . $thread->get_nombre() . '
+                                            <a href="/poochie/user/perfil.php?id=' . $thread->get_idusuario() . '">' . $thread->get_nombre() . '</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="general">
-                                            10 comentarios
+                                            '.$comentarios.' comentarios
                                         </td>
                                         <td class="general">
                                             5 visitas

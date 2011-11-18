@@ -27,10 +27,10 @@
 
 .thread .title 
 {
-
+    font-family: verdana, arial, helvetica, sans-serif;
 }
 
-.thread .title a:link{color: #010101; text-decoration: none;}
+.thread .title a:link{color: #0000FF; text-decoration: none;}
 .thread .title a:visited {color: #83569d; text-decoration: none; }
 
 .thread .column
@@ -50,10 +50,13 @@
 .thread .user
 {
     font-size: 8pt;
+    font-weight: bold;
+    
 }
 
-.thread .user a:link{color: #0068ff; text-decoration: none;}
-.thread .user a:visited {color: #0068ff; text-decoration: none; }
+.thread .user a:link{color: #369; text-decoration: none;}
+.thread .user a:visited {color: #369; text-decoration: none; }
+.thread .user a:hover {text-decoration: underline;}
 
 .thread table
 {
@@ -121,11 +124,25 @@
 }
 .thread textarea
 {
-   width: 50%;
-   margin-left: -1px;
+    width: 50%;
+    margin-left: -1px;
 }
 .thread td
 {
     /*border-style:solid;
     border-width: 1px;*/
+}
+
+.underpost
+{
+    font-size: 10px;
+    color: #888;
+    font-weight: bold;
+    padding-left: 5px;
+    text-decoration: none;
+}
+
+a:hover
+{
+    text-decoration: underline;
 }

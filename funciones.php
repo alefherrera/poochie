@@ -97,13 +97,32 @@ function redir_session() {
 
 function mostrar_titulo_thread() {
     $result = threads::Select(new threads);
-
+    $i = 0;
     while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+        $votos = $row['Votosp'] - $row['Votosn'];
+        $comentarios = count_post($row['idThread']);               
+        if (!$comentarios)
+            $comentarios = 0;
+        $i+=1;
+        
+        /*$dbname = "Poochie";
+        $user = "admin";
+        $user_password = "pedro";
+        //$host = "poochiedb.no-ip.org";
+        $host = "holyelite.no-ip.org";
+        //$host = "localhost";
+        mysql_connect($host, $user, $user_password) or die("No se pudo establecer la conexion con MySQL" . mysql_error());
+        @mysql_select_db($dbname) or die("Error al seleccionar base de datos");
+        
+        $horas = mysql_query('SELECT TIMEDIFF('.$row['FechaAlta'].',getdate()'); //Con esta, recibes las horas transcurridas
+        $horas = mysql_result($horas,0);*/
+        
+        
         echo'   <div id="index_main">
         <table class="thread">
             <tr>
                 <td class="column">
-                    1
+                    ' . $i . '
                 </td>
                 <td class="column">
                     <table>
@@ -113,7 +132,7 @@ function mostrar_titulo_thread() {
                         </tr>
                         <tr>
                             <td class="total" align="center" >
-                                3200
+                                ' . $votos . '
                             </td>
                         </tr>
                         <tr>
@@ -132,13 +151,13 @@ function mostrar_titulo_thread() {
                                 <table>
                                     <tr>
                                         <td class="positive">
-                                            +32
+                                            +' . $row['Votosp'] . '
                                         </td>
                                         <td>
                                             /
                                         </td>
                                         <td class="negative">
-                                            -20
+                                            -' . $row['Votosn'] . '
                                         </td>
                                     </tr>
                                 </table>
@@ -154,18 +173,18 @@ function mostrar_titulo_thread() {
                                 <table>
                                     <tr>
                                         <td class="user">
-                                            <a href="/poochie/user/perfil.php?id=' . $row['idUsuario'] . '">' . $row['Nombre'] . '</a> 
+                                            <a href="/poochie/user/perfil.php?id=' . $row['idUsuario'] . '">'. $row['Nombre'] . '</a> 
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="general">
-                                            10 comentarios
+                                            ' . $comentarios . ' comentarios
                                         </td>
                                         <td class="general">
                                             5 visitas
                                         </td>
                                         <td>                             <td class="general">
-                                            01/01/1995
+                                            ' . $row['FechaAlta'] . '
                                         </td>
                                     </tr>
                                 </table>
@@ -180,16 +199,18 @@ function mostrar_titulo_thread() {
 }
 
 function getpost($idthread, $idpadre) {
-    
+
     $post = new posts();
     $post->set_idthread($idthread);
     $post->set_idpostpadre($idpadre);
-$txt['form_reply'] = 'Responder';
-$txt['form_submit'] = 'Enviar';
+    $txt['form_reply'] = 'comentar';
+    $txt['form_submit'] = 'enviar';
+    $txt['form_edit'] = 'editar';
     $result = posts::Select($post);
-  //  if(!$result)
+    //  if(!$result)
     //    exit;
     while ($row = mysql_fetch_array($result, MYSQLI_ASSOC)) {
+        $votos = $row['Votosp'] - $row['Votosn'];
         echo'<table id="mesidThis" class="thread">
             <tr>
                 <td class="column">
@@ -200,7 +221,7 @@ $txt['form_submit'] = 'Enviar';
                         </tr>
                         <tr>
                             <td class="total">
-                                3200
+                                ' . $votos . '
                             </td>
                         </tr>
                         <tr>
@@ -217,13 +238,13 @@ $txt['form_submit'] = 'Enviar';
                                 <table>
                                     <tr>
                                         <td class="positive">
-                                            '.$row['Votosp'].'
+                                            ' . $row['Votosp'] . '
                                         </td>
                                         <td>
                                             /
                                         </td>
                                         <td class="negative">
-                                            '.$row['Votosn'].'
+                                            ' . $row['Votosn'] . '
                                         </td>
                                     </tr>
                                 </table>
@@ -234,12 +255,12 @@ $txt['form_submit'] = 'Enviar';
                                 <table>
                                     <tr>
                                         <td class="user">
-                                            '.$row['Nombre'].'
+                                            <a href="/poochie/user/perfil.php?id=' . $row['idUsuario'] . '">' . $row['Nombre'] . '</a>
                                         </td>
                                     </tr>
                                     <tr>                            
                                         <td class="general">
-                                        '.$row['FechaAlta'].'
+                                        ' . $row['FechaAlta'] . '
                                         </td>
                                     </tr>
                                 </table>
@@ -247,12 +268,15 @@ $txt['form_submit'] = 'Enviar';
                         </tr>
                         <tr>
                             <td class="contenido">
-                                '.$row['Contenido'].'
+                                ' . $row['Contenido'] . '
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label id="'. $row['idPost'].'" onclick="show_form(this);">' . $txt['form_reply'] . '</label>
+                                <!--<label style="cursor:pointer" id="' . $row['idPost'] . '" onclick="show_form(this);">' . $txt['form_reply'] . '</label>-->
+                                 <a class="underpost" href="editar.php?' . $row['idPost'] . '">' . $txt['form_edit'] . '</label>
+                                 <a class="underpost" href="javascript:void(0)" id="' . $row['idPost'] . '" onclick="show_form(this);">' . $txt['form_reply'] . '</label>
+
                             </td>
                         </tr>
                     </table>
@@ -264,9 +288,9 @@ $txt['form_submit'] = 'Enviar';
                 <td>
                     <form name="reply" method="post">
                         <div>
-                            <input type=hidden name="idPostPadre" value="'.$row['idPost'].'">
-                            <textarea id="txt'.$row['idPost'].'" class="txtreply" name="mensaje" rows="10" ></textarea>
-                            <input id="sub'.$row['idPost'].'" class="btnsubmit" type="submit" name="submit" value="' . $txt['form_submit'] . '" />
+                            <input type=hidden name="idPostPadre" value="' . $row['idPost'] . '">
+                            <textarea id="txt' . $row['idPost'] . '" class="txtreply" name="mensaje" rows="10" ></textarea>
+                            <input id="sub' . $row['idPost'] . '" class="btnsubmit" type="submit" name="submit" value="' . $txt['form_submit'] . '" />
                         </div>
                     </form>
                 </td>
@@ -281,6 +305,12 @@ $txt['form_submit'] = 'Enviar';
             </tr>
         </table>';
     }
+}
+
+function count_post($id) {
+    $post = new posts();
+    $post->set_idthread($id);
+    return mysql_num_rows(posts::Select($post));
 }
 
 ?>
